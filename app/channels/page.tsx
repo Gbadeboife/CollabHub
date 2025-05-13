@@ -5,15 +5,16 @@ function Channels() {
 
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
     const fetchChannels = async () => {
-        /*try{
-            const response = await fetch(`${baseUrl}/api/workspaces/`,{
+        try{
+            const response = await fetch(`${baseUrl}/api/workspaces/members/create`,{
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    name: "General",
-                    ownerId: 1
+                    userId: 45,
+                    workspaceId: 1,
+                    role: 'admin'
                 })
             })
             console.log('success')
@@ -22,7 +23,7 @@ function Channels() {
 
         } catch (error) {
             console.error("Error fetching channels:", error)
-        }*/
+        }
 
     }
 
