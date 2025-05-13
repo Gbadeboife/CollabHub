@@ -8,12 +8,11 @@ export async function POST(request: Request) {
         const { workspaceId, userId, role } = memberData;
         
         const user_id= userId
-    
         const workspace_id= workspaceId
-        
-        
+        console.log("userId", user_id)
+
         const { data, error } = await supabase
-        .from('Workspaces_members')
+        .from('Workspace_members')
         .insert([{ user_id, role, workspace_id }]) 
 
         if (error) {
@@ -23,7 +22,6 @@ export async function POST(request: Request) {
         return new NextResponse(null, { status: 201 })
 
     } catch (error) {
-        console.error("Error creating workspace:", error);
         return new NextResponse("Internal Server Error", {
             status: 500,
         })
