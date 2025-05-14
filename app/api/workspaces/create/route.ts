@@ -9,7 +9,6 @@ export async function POST(request: Request) {
         
         const owner_id= ownerId
       
-        
 
         const { data, error } = await supabase
         .from('Workspaces')
