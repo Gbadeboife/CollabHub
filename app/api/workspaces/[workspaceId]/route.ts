@@ -5,22 +5,33 @@ export async function GET(  req: Request,
   { params }: { params: { workspaceId: string } }
 ) {
     try{
-        const { workspaceId } = params
+        const { workspaceId } = params;
 
         const supabase = await createClient();
 
-
-        const { data: workspace, error } = await supabase
+        // Fetch workspace
+        const { data: workspace, error: workspaceError } = await supabase
         .from('Workspaces')
         .select('*')
         .eq('id', workspaceId)
-        .single()
+        .single();
 
-        if (error) {
-            return NextResponse.json({ error: error.message }, { status: 404 })
+        if (workspaceError) {
+        return NextResponse.json({ error: workspaceError.message }, { status: 404 });
         }
 
-        return NextResponse.json({ workspace }, { status: 200 })
+        // Fetch channels for workspace
+        const { data: channels, error: channelsError } = await supabase
+        .from('Channels')
+        .select('*')
+        .eq('workspace_id', workspaceId);
+
+        if (channelsError) {
+            return NextResponse.json({ error: channelsError.message }, { status: 404 });
+        }
+
+        return NextResponse.json({ workspace, channels }, { status: 200 });
+
     } catch (error) {
         return new NextResponse("Internal Server Error", {
             status: 500,
