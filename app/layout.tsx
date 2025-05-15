@@ -27,6 +27,11 @@ export default function RootLayout({
     <>
     <html lang="en">
       <body className={geistSans.className}>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <main className="min-h-screen flex flex-col items-center">
+            {children}
+          </main>
+        </ThemeProvider>
       </body>
     </html>
     </>
