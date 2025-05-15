@@ -1,3 +1,6 @@
+
+import { type ClassValue, clsx } from "clsx"
+import { twMerge } from "tailwind-merge"
 import { redirect } from "next/navigation";
 
 /**
@@ -13,4 +16,8 @@ export function encodedRedirect(
   message: string,
 ) {
   return redirect(`${path}?${type}=${encodeURIComponent(message)}`);
+}
+
+export function cn(...inputs: ClassValue[]) {
+  return twMerge(clsx(inputs))
 }

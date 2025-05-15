@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ChevronLeft, Clock, MoreHorizontal, Search, SlidersHorizontal, UserPlus } from "lucide-react"
-import TaskColumn from "@/components/task-column"
-import { TaskCard } from "@/components/task-card"
+import TaskColumn from "@/components/tasks/task-column"
+import { TaskCard } from "@/components/tasks/task-card"
 
 
 export default async function Workspace() {
