@@ -11,7 +11,7 @@ import { TaskCard } from "@/components/tasks/task-card"
 
 
 export default async function Workspace() {
-  const supabase = await createClient();
+  /*const supabase = await createClient();
 
   const {
     data: { user },
@@ -19,7 +19,21 @@ export default async function Workspace() {
 
   if (!user) {
     return redirect("/sign-in");
-  }
+  }*/
+
+    const taskCardInfo = {
+      status: "In Research",
+      statusColor: "text-amber-500",
+      title: "Social Media Campaign Planning",
+      description: "Develop a social media campaign for the new product launch",
+      assignees: ["U3", "U4"],
+      date: "30 Mar 2023",
+      priority: "High",
+      priorityColor: "bg-red-100 text-red-800",
+      comments: 8,
+      links: 1,
+      completion:"2/3"
+    }
 
 
   return (
@@ -38,9 +52,6 @@ export default async function Workspace() {
             <div className="relative hidden md:block">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
               <Input type="search" placeholder="Search" className="w-64 rounded-md pl-8 md:w-80" />
-              <kbd className="pointer-events-none absolute right-2 top-2 hidden h-5 select-none items-center gap-1 rounded border bg-muted px-1.5 font-mono text-xs font-medium opacity-100 sm:flex">
-                <span className="text-xs">⌘</span>F
-              </kbd>
             </div>
             <Button variant="ghost" size="icon" className="h-8 w-8">
               <Clock className="h-4 w-4" />
@@ -180,7 +191,7 @@ export default async function Workspace() {
             <TabsContent value="board" className="mt-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <TaskColumn title="To do" count={4} color="text-amber-500">
-                  <TaskCard
+                  {/*<TaskCard
                     status="Not Started"
                     statusColor="text-purple-500"
                     title="Writing an Article on AI Technology"
@@ -206,23 +217,13 @@ export default async function Workspace() {
                     links={1}
                     completion="2/3"
                   />
-                </TaskColumn>
+                </TaskColumn>*/}
 
                 <TaskColumn title="In Progress" count={4} color="text-blue-500">
                   <TaskCard
-                    status="In Research"
-                    statusColor="text-amber-500"
-                    title="Social Media Campaign Planning"
-                    description="Develop a social media campaign for the new product launch"
-                    assignees={["U3", "U4"]}
-                    date="30 Mar 2023"
-                    priority="High"
-                    priorityColor="bg-red-100 text-red-800"
-                    comments={8}
-                    links={1}
-                    completion="2/3"
+                    taskInfo={taskCardInfo}
                   />
-                  <TaskCard
+                  {/*<TaskCard
                     status="On Track"
                     statusColor="text-purple-500"
                     title="Video Editing for Marketing Promo"
@@ -234,11 +235,12 @@ export default async function Workspace() {
                     comments={3}
                     links={0}
                     completion="2/3"
-                  />
+                  />*/}
                 </TaskColumn>
 
                 <TaskColumn title="Done" count={4} color="text-pink-500">
-                  <TaskCard
+                  <div></div>
+                  {/*<TaskCard
                     status="Complete"
                     statusColor="text-green-500"
                     title="Mobile App Bug Fixing"
@@ -263,7 +265,7 @@ export default async function Workspace() {
                     comments={4}
                     links={2}
                     completion="0/3"
-                  />
+                  />*/}
                 </TaskColumn>
               </div>
             </TabsContent>

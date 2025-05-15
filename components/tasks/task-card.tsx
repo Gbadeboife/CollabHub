@@ -17,19 +17,21 @@ interface TaskCardProps {
   completion: string
 }
 
-export function TaskCard({
-  status,
-  statusColor,
-  title,
-  description,
-  assignees,
-  date,
-  priority,
-  priorityColor,
-  comments,
-  links,
-  completion,
-}: TaskCardProps) {
+export function TaskCard(taskInfo: TaskCardProps) {
+  const {
+    status,
+    statusColor,
+    title,
+    description,
+    assignees,
+    date,
+    priority,
+    priorityColor,
+    comments,
+    links,
+    completion,
+  } = taskInfo
+
   return (
     <Card className="overflow-hidden">
       <CardHeader className="p-3 pb-0">
