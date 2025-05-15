@@ -4,20 +4,22 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { FileText, Link2, MessageSquare, MoreHorizontal } from "lucide-react"
 
 interface TaskCardProps {
-  status: string
-  statusColor: string
-  title: string
-  description: string
-  assignees: string[]
-  date: string
-  priority: string
-  priorityColor: string
-  comments: number
-  links: number
-  completion: string
+  taskInfo: {
+    status: string
+    statusColor: string
+    title: string
+    description: string
+    assignees: string[]
+    date: string
+    priority: string
+    priorityColor: string
+    comments: number
+    links: number
+    completion: string
+  }
 }
 
-export function TaskCard(taskInfo: TaskCardProps) {
+export function TaskCard({taskInfo}: TaskCardProps) {
   const {
     status,
     statusColor,

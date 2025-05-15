@@ -35,6 +35,8 @@ export default async function Workspace() {
       completion:"2/3"
     }
 
+  
+
 
   return (
     <div className="min-h-screen bg-white">
@@ -191,6 +193,7 @@ export default async function Workspace() {
             <TabsContent value="board" className="mt-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <TaskColumn title="To do" count={4} color="text-amber-500">
+                  <div></div>
                   {/*<TaskCard
                     status="Not Started"
                     statusColor="text-purple-500"
@@ -216,8 +219,8 @@ export default async function Workspace() {
                     comments={12}
                     links={1}
                     completion="2/3"
-                  />
-                </TaskColumn>*/}
+                  />*/}
+                </TaskColumn>
 
                 <TaskColumn title="In Progress" count={4} color="text-blue-500">
                   <TaskCard
