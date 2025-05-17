@@ -2,21 +2,11 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { FileText, Link2, MessageSquare, MoreHorizontal } from "lucide-react"
+import { TaskProps } from "@/app/types"
+
 
 interface TaskCardProps {
-  taskInfo: {
-    status: string
-    statusColor: string
-    title: string
-    description: string
-    assignees: string[]
-    date: string
-    priority: string
-    priorityColor: string
-    comments: number
-    links: number
-    completion: string
-  }
+  taskInfo: TaskProps
 }
 
 export function TaskCard({taskInfo}: TaskCardProps) {
