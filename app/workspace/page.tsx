@@ -17,11 +17,15 @@ import CreateTaskModule from "@/components/modules/create-task-module";
 export default function Workspace() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
+  const [members, setMembers]= useState <null>(null)
+
+
+
 
   useEffect(() => {
     const fetchTasks = async () => {
       try {
-        const response = await fetch("/api/workspace/tasks");
+        const response = await fetch(`/api/tasks/${workspaceId}`);
         const data = await response.json();
         setTasks(data.tasks);
       } catch (error) {
@@ -31,6 +35,22 @@ export default function Workspace() {
 
     fetchTasks();
     setTasks(prev => [...prev, taskCardInfo])
+
+  }, []);
+
+
+  useEffect(() => {
+    const fetchMembers = async () => {
+      try {
+        const response = await fetch(`/api/members/${workspaceId}`);
+        const data = await response.json();
+        setMembers(data.members);
+      } catch (error) {
+        console.error("Failed to fetch tasks:", error);
+      }
+    };
+
+    fetchMembers();
 
   }, []);
 
