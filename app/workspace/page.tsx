@@ -1,6 +1,8 @@
+"use client"
+
 import { createClient } from "@/utils/supabase/server";
 import { redirect } from "next/navigation";
-
+import { useState, useEffect } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -8,9 +10,30 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ChevronLeft, Clock, MoreHorizontal, Search, SlidersHorizontal, UserPlus } from "lucide-react"
 import TaskColumn from "@/components/tasks/task-column"
 import { TaskCard } from "@/components/tasks/task-card"
+import { TaskProps } from "../types";
+import CreateTaskModule from "@/components/modules/create-task-module";
 
 
-export default async function Workspace() {
+export default function Workspace() {
+  const [tasks, setTasks] = useState<TaskProps[]>([]);
+  const [showCreateTask, setShowCreateTask] = useState(false);
+
+  useEffect(() => {
+    const fetchTasks = async () => {
+      try {
+        const response = await fetch("/api/workspace/tasks");
+        const data = await response.json();
+        setTasks(data.tasks);
+      } catch (error) {
+        console.error("Failed to fetch tasks:", error);
+      }
+    };
+
+    fetchTasks();
+    setTasks(prev => [...prev, taskCardInfo])
+
+  }, []);
+
   /*const supabase = await createClient();
 
   const {
@@ -22,6 +45,7 @@ export default async function Workspace() {
   }*/
 
     const taskCardInfo = {
+      category: "To do",
       status: "In Research",
       statusColor: "text-amber-500",
       title: "Social Media Campaign Planning",
@@ -110,8 +134,7 @@ export default async function Workspace() {
               <Button className="gap-1">
                 <UserPlus className="h-4 w-4" />
                 Invite Member
-              </Button>
-              <Button variant="outline" className="gap-1">
+              </Button>              <Button variant="outline" className="gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
@@ -130,8 +153,31 @@ export default async function Workspace() {
                 </svg>
                 Share
               </Button>
+              <Button onClick={() => setShowCreateTask(true)} className="gap-1">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-4 w-4"
+                >
+                  <line x1="12" y1="5" x2="12" y2="19" />
+                  <line x1="5" y1="12" x2="19" y2="12" />
+                </svg>
+                Create Task
+              </Button>
             </div>
           </div>
+          {showCreateTask && (
+            <CreateTaskModule
+              onClose={() => setShowCreateTask(false)}
+            />
+          )}
           <Tabs defaultValue="board" className="w-full">
             <div className="flex items-center justify-between">
               <TabsList>
@@ -193,7 +239,12 @@ export default async function Workspace() {
             <TabsContent value="board" className="mt-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <TaskColumn title="To do" count={4} color="text-amber-500">
-                  <div></div>
+                  {tasks.filter(task => task.category === "To do").map((task) => (
+                    <TaskCard
+                      key={task.title}
+                      taskInfo= {task}
+                    />
+                  ))}
                   {/*<TaskCard
                     status="Not Started"
                     statusColor="text-purple-500"
@@ -223,9 +274,12 @@ export default async function Workspace() {
                 </TaskColumn>
 
                 <TaskColumn title="In Progress" count={4} color="text-blue-500">
-                  <TaskCard
-                    taskInfo={taskCardInfo}
-                  />
+                  {tasks.filter(task => task.category === "In progress").map((task) => (
+                    <TaskCard
+                      key={task.title}
+                      taskInfo= {task}
+                    />
+                  ))}
                   {/*<TaskCard
                     status="On Track"
                     statusColor="text-purple-500"
@@ -242,7 +296,13 @@ export default async function Workspace() {
                 </TaskColumn>
 
                 <TaskColumn title="Done" count={4} color="text-pink-500">
-                  <div></div>
+                 
+                  {tasks.filter(task => task.category === "Done").map((task) => (
+                    <TaskCard
+                      key={task.title}
+                      taskInfo= {task}
+                    />
+                  ))}
                   {/*<TaskCard
                     status="Complete"
                     statusColor="text-green-500"
