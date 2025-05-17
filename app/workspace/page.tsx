@@ -55,8 +55,6 @@ export default function Workspace() {
       priority: "High",
       priorityColor: "bg-red-100 text-red-800",
       comments: 8,
-      links: 1,
-      completion:"2/3"
     }
 
   
@@ -176,6 +174,7 @@ export default function Workspace() {
           {showCreateTask && (
             <CreateTaskModule
               onClose={() => setShowCreateTask(false)}
+              wrkSpaceMembers={['hr']}
             />
           )}
           <Tabs defaultValue="board" className="w-full">

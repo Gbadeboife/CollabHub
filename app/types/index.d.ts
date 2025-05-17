@@ -9,6 +9,4 @@ export interface TaskProps {
     priority: string
     priorityColor: string
     comments: number
-    links: number
-    completion: string
   }

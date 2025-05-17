@@ -20,8 +20,6 @@ export function TaskCard({taskInfo}: TaskCardProps) {
     priority,
     priorityColor,
     comments,
-    links,
-    completion,
   } = taskInfo
 
   return (
@@ -72,14 +70,6 @@ export function TaskCard({taskInfo}: TaskCardProps) {
               <MessageSquare className="h-3.5 w-3.5" />
               <span>{comments} Comments</span>
             </div>
-            <div className="flex items-center gap-1">
-              <Link2 className="h-3.5 w-3.5" />
-              <span>{links} Links</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-1">
-            <FileText className="h-3.5 w-3.5" />
-            <span>{completion}</span>
           </div>
         </div>
       </CardFooter>

@@ -8,10 +8,10 @@ import { X } from "lucide-react";
 
 interface CreateTaskModuleProps {
   onClose: () => void;
-  TaskType?: string;
+  wrkSpaceMembers: string[]
 }
 
-export default function CreateTaskModule({ onClose, TaskType }: CreateTaskModuleProps) {
+export default function CreateTaskModule({ onClose, wrkSpaceMembers }: CreateTaskModuleProps) {
   const [formData, setFormData] = useState<TaskProps>({
     category: "To do",
     status: "Not Started",
@@ -23,9 +23,8 @@ export default function CreateTaskModule({ onClose, TaskType }: CreateTaskModule
     priority: "Medium",
     priorityColor: "bg-amber-100 text-amber-800",
     comments: 0,
-    links: 0,
-    completion: "0/3"
   });
+
 
   const createTask = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -59,8 +58,7 @@ export default function CreateTaskModule({ onClose, TaskType }: CreateTaskModule
           <X className="h-4 w-4" />
         </Button>
         <h2 className="text-xl font-bold mb-4">Create New Task</h2>
-        <form onSubmit={createTask} className="space-y-4">
-          <div>
+        <form onSubmit={createTask} className="space-y-4">          <div>
             <label className="block text-sm font-medium mb-1">Title</label>
             <Input
               type="text"
@@ -69,6 +67,19 @@ export default function CreateTaskModule({ onClose, TaskType }: CreateTaskModule
               onChange={(e) => setFormData({ ...formData, title: e.target.value })}
               required
             />
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Category</label>
+            <select
+              className="w-full px-3 py-2 border rounded-md bg-white"
+              value={formData.category}
+              onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+              required
+            >
+              <option value="To do">To do</option>
+              <option value="In Progress">In Progress</option>
+              <option value="Done">Done</option>
+            </select>
           </div>
           <div>
             <label className="block text-sm font-medium mb-1">Description</label>
@@ -103,6 +114,30 @@ export default function CreateTaskModule({ onClose, TaskType }: CreateTaskModule
               <option value="Medium">Medium</option>
               <option value="High">High</option>
             </select>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Assignees</label>
+            <div className="space-y-2">
+              {["U1", "U2", "U3", "U4"].map((user) => (
+                <label key={user} className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    className="rounded border-gray-300"
+                    checked={formData.assignees.includes(user)}
+                    onChange={(e) => {
+                      setFormData({
+                        ...formData,
+                        assignees: e.target.checked
+                          ? [...formData.assignees, user]
+                          : formData.assignees.filter(u => u !== user)
+                      });
+                    }}
+                  />
+                  <img src="" alt="" />
+                  <span className="text-sm">User {user}</span>
+                </label>
+              ))}
+            </div>
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={onClose}>
