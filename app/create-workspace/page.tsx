@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { ChevronLeft, Plus, Users } from "lucide-react"
-//import WorkspacePreview from "@/components/workspace-preview"
+import WorkspacePreview from "@/components/workspace-preview"
 import WorkspaceIconPicker from "@/components/workspace-icon-picker"
 import { redirect } from "next/navigation";
 
@@ -209,7 +209,6 @@ export default function CreateWorkspacePage() {
                         ))}
                       </div>
 
-                      <Separator className="my-4" />
 
                       <div className="space-y-3">
                         <Label>Custom Channels</Label>
