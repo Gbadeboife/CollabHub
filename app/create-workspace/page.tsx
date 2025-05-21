@@ -61,8 +61,6 @@ export default function CreateWorkspacePage() {
             <Button variant="ghost" size="icon" className="h-8 w-8">
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <span>Team spaces</span>
-            <span>/</span>
             <span className="font-medium text-foreground">Create Workspace</span>
           </div>
         </div>
