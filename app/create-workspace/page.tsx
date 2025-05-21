@@ -132,7 +132,7 @@ export default function CreateWorkspacePage() {
                       <CardDescription>Invite people to collaborate in your workspace.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
-                      <div className="space-y-2">
+                      {/*<div className="space-y-2">
                         <Label htmlFor="email">Invite by Email</Label>
                         <div className="flex gap-2">
                           <Input id="email" placeholder="Enter email address" className="flex-1" />
@@ -141,7 +141,7 @@ export default function CreateWorkspacePage() {
                             Add
                           </Button>
                         </div>
-                      </div>
+                      </div>*/}
 
 
                       <div className="space-y-3">
@@ -358,7 +358,7 @@ const customChannels = [
         <path d="m7 21 5-5 5 5" />
       </svg>
     ),
-  },
+  }/*,
   {
     id: 4,
     name: "Development",
@@ -380,5 +380,5 @@ const customChannels = [
         <polyline points="8 6 2 12 8 18" />
       </svg>
     ),
-  },
+  },*/
 ]
