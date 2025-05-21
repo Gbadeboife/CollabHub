@@ -1,4 +1,4 @@
-import { Geist } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
@@ -13,8 +13,7 @@ export const metadata = {
   description: "A team collaboration tool for managing tasks, projects, and communication.",
 };
 
-const geistSans = Geist({
-  display: "swap",
+const quicksand = Quicksand({
   subsets: ["latin"],
 });
 
@@ -26,7 +25,7 @@ export default function RootLayout({
   return (
     <>
     <html lang="en">
-      <body className={geistSans.className}>
+      <body className={quicksand.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <main className="min-h-screen flex flex-col items-center">
             {children}
