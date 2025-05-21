@@ -41,8 +41,8 @@ interface WorkspaceIconPickerProps {
 
 export default function WorkspaceIconPicker({
   onSelectIcon,
-  defaultIcon = "",
-  workspaceName = "WS",
+  defaultIcon,
+  workspaceName,
 }: WorkspaceIconPickerProps) {
   const [selectedIcon, setSelectedIcon] = useState(defaultIcon || PREDEFINED_ICONS[0].src)
 
@@ -59,7 +59,7 @@ export default function WorkspaceIconPicker({
           <Avatar className="h-16 w-16">
             <AvatarImage src={selectedIcon || "/placeholder.svg"} alt="Selected workspace icon" />
             <AvatarFallback className="bg-primary text-primary-foreground text-xl">
-              {workspaceName.substring(0, 2).toUpperCase()}
+              {workspaceName?.substring(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           <div>
