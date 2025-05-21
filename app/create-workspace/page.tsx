@@ -18,11 +18,17 @@ import { redirect } from "next/navigation";
 
 
 export default function CreateWorkspacePage() {
+  
+  
   const [workspaceData, setWorkspaceData] = useState({
     name: "Marketing Team",
     description: "Collaborate on marketing campaigns and strategies",
     iconSrc: "/icons/workspace-icon-1.png",
   })
+
+  
+  const [activeTab, setActiveTab] = useState <string>("details")
+  console.log(activeTab)
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWorkspaceData({ ...workspaceData, name: e.target.value })
@@ -74,7 +80,7 @@ export default function CreateWorkspacePage() {
 
           <div className="grid gap-6 md:grid-cols-3">
             <div className="md:col-span-2">
-              <Tabs defaultValue="details" className="w-full">
+              <Tabs value={activeTab} onValueChange={setActiveTab} defaultValue="details" className="w-full">
                 <TabsList className="grid w-full grid-cols-3">
                   <TabsTrigger value="details">Details</TabsTrigger>
                   <TabsTrigger value="members">Members</TabsTrigger>
@@ -114,7 +120,7 @@ export default function CreateWorkspacePage() {
                     </CardContent>
                     <CardFooter className="flex justify-between">
                       <Button variant="outline">Cancel</Button>
-                      <Button>Continue to Members</Button>
+                      <Button  onClick={() => setActiveTab("members")}>Continue to Members</Button>
                     </CardFooter>
                   </Card>
                 </TabsContent>
