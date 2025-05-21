@@ -164,8 +164,8 @@ export default function CreateWorkspacePage() {
                       </div>
                     </CardContent>
                     <CardFooter className="flex justify-between">
-                      <Button variant="outline">Back</Button>
-                      <Button>Continue to Channels</Button>
+                      <Button variant="outline" onClick={() => setActiveTab("details")}>Back</Button>
+                      <Button onClick={() => setActiveTab("channels")}>Continue to Channels</Button>
                     </CardFooter>
                   </Card>
                 </TabsContent>
@@ -236,7 +236,7 @@ export default function CreateWorkspacePage() {
                       </div>
                     </CardContent>
                     <CardFooter className="flex justify-between">
-                      <Button variant="outline">Back</Button>
+                      <Button variant="outline" onClick={() => setActiveTab("members")}>Back</Button>
                       <Button>Create Workspace</Button>
                     </CardFooter>
                   </Card>
