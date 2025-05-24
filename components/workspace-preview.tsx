@@ -8,12 +8,16 @@ interface WorkspacePreviewProps {
   iconSrc?: string
   name?: string
   description?: string
+  members?: string[]
+  channels?: string[]
 }
 
 export default function WorkspacePreview({
   iconSrc = "/icons/workspace-icon-1.png",
   name = "Marketing Team",
   description = "Collaborate on marketing campaigns and strategies",
+  members,
+  channels
 }: WorkspacePreviewProps) {
   // In a real app, this would be connected to the form state
   const [icon, setIcon] = useState(iconSrc)
@@ -45,6 +49,19 @@ export default function WorkspacePreview({
             <span>Members</span>
           </div>
           <div className="flex -space-x-2">
+            {
+              members?.map((member, index) => (
+                <Avatar
+                  key={index}
+                  className="border-2 border-background h-7 w-7"
+                >
+                  <AvatarImage src={member} alt={`Member ${index + 1}`} />
+                  <AvatarFallback className="text-xs">
+                    {member.substring(0, 2).toUpperCase()}
+                  </AvatarFallback>
+                </Avatar>
+              ))
+            }
             <Avatar className="border-2 border-background h-7 w-7">
               <AvatarFallback className="text-xs">AJ</AvatarFallback>
             </Avatar>
