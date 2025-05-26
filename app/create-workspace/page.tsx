@@ -62,19 +62,28 @@ export default function CreateWorkspacePage() {
 
   const createWorkspace= async()=>{
     console.log(workspaceData)
-    try{
-      const data= fetch('api/workspaces/create', {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ workspaceData }),
+
+    try {
+      const response = await fetch('/api/workspaces/create', {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ workspaceData }),
       });
 
-      return redirect(`/workspace/${workspaceId}`)
-    } catch (error){
-      console.log(error)
+      if (!response.ok) {
+        throw new Error("Failed to create workspace");
+      }
+
+      const result = await response.json();
+      const workspaceId = result.id;
+
+      return redirect(`/workspace/${workspaceId}`);
+    } catch (error) {
+      console.error("Error creating workspace:", error);
     }
+
   }
 
   const addCustomChannel = () => {
