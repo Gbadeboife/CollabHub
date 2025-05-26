@@ -147,6 +147,7 @@ export default function CreateWorkspacePage() {
                       <CardDescription>Invite people to collaborate in your workspace.</CardDescription>
                     </CardHeader>
                     <CardContent className="space-y-4">
+                      
                       {/*<div className="space-y-2">
                         <Label htmlFor="email">Invite by Email</Label>
                         <div className="flex gap-2">
@@ -186,7 +187,6 @@ export default function CreateWorkspacePage() {
                                 }));
                               }}
                             />
-
                                 
                           </div>
                         ))}
@@ -209,8 +209,9 @@ export default function CreateWorkspacePage() {
                       <div className="space-y-2">
                         <Label htmlFor="channel-name">Channel Name</Label>
                         <div className="flex gap-2">
-                          <Input id="channel-name" placeholder="Enter channel name" className="flex-1" />
-                          <Button>
+                          <Input id="channel-name" placeholder="Enter channel name" className="flex-1" onChange={(e)=> setNewChannel(e.target.value)}/>
+                          <Button onClick={() => setCustomChannels(prev => [...prev, {
+                            id: customChannels.length + 1,}                            
                             <Plus className="mr-2 h-4 w-4" />
                             Add
                           </Button>
@@ -371,7 +372,7 @@ const defaultChannels = [
   },
 ]
 
-const customChannels = [
+const [customChannels, setCustomChannels] = usueState([
   {
     id: 3,
     name: "Marketing",
@@ -417,4 +418,4 @@ const customChannels = [
       </svg>
     ),
   },
-]
+])
