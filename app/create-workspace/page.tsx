@@ -28,7 +28,7 @@ export default function CreateWorkspacePage() {
     description: string;
     iconSrc: string;
     members: number[];
-    channels: number[]; // Add this line
+    channels: number[];
   }
   
   const [workspaceData, setWorkspaceData] = useState <WorkspaceData> ({
@@ -61,11 +61,12 @@ export default function CreateWorkspacePage() {
   const [newChannel, setNewChannel]= useState<string>("")
 
   const createWorkspace= async()=>{
+    console.log(workspaceData)
     try{
       const data= fetch('api/workspaces/create', {
           method: "POST",
           headers: {
-              "Content-Type": "application/json",
+            "Content-Type": "application/json",
           },
           body: JSON.stringify({ workspaceData }),
       });
@@ -170,7 +171,7 @@ export default function CreateWorkspacePage() {
                     </CardContent>
                     <CardFooter className="flex justify-between">
                       <Button variant="outline">Cancel</Button>
-                      <Button  onClick={() => setActiveTab("members")}>Continue to Members</Button>
+                      <Button disabled={!workspaceData.name} onClick={() => setActiveTab("members")}>Continue to Members</Button>
                     </CardFooter>
                   </Card>
                 </TabsContent>
@@ -229,7 +230,7 @@ export default function CreateWorkspacePage() {
                     </CardContent>
                     <CardFooter className="flex justify-between">
                       <Button variant="outline" onClick={() => setActiveTab("details")}>Back</Button>
-                      <Button onClick={() => setActiveTab("channels")}>Continue to Channels</Button>
+                      <Button disabled={workspaceData.members.length < 1} onClick={() => setActiveTab("channels")}>Continue to Channels</Button>
                     </CardFooter>
                   </Card>
                 </TabsContent>
@@ -312,7 +313,7 @@ export default function CreateWorkspacePage() {
                     </CardContent>
                     <CardFooter className="flex justify-between">
                       <Button variant="outline" onClick={() => setActiveTab("members")}>Back</Button>
-                      <Button>Create Workspace</Button>
+                      <Button onClick={createWorkspace}>Create Workspace</Button>
                     </CardFooter>
                   </Card>
                 </TabsContent>
