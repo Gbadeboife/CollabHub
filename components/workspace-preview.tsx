@@ -57,23 +57,12 @@ export default function WorkspacePreview({
                 >
                   <AvatarImage src={member} alt={`Member ${index + 1}`} />
                   <AvatarFallback className="text-xs">
-                    {member.substring(0, 2).toUpperCase()}
+                    {member}
                   </AvatarFallback>
                 </Avatar>
               ))
             }
-            <Avatar className="border-2 border-background h-7 w-7">
-              <AvatarFallback className="text-xs">AJ</AvatarFallback>
-            </Avatar>
-            <Avatar className="border-2 border-background h-7 w-7">
-              <AvatarFallback className="text-xs">SW</AvatarFallback>
-            </Avatar>
-            <Avatar className="border-2 border-background h-7 w-7">
-              <AvatarFallback className="text-xs">MC</AvatarFallback>
-            </Avatar>
-            <div className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-background bg-muted text-xs font-medium">
-              +2
-            </div>
+
           </div>
         </div>
 
@@ -99,18 +88,15 @@ export default function WorkspacePreview({
             <span>Channels</span>
           </div>
           <div className="space-y-1">
-            <div className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-accent">
-              <span className="text-muted-foreground">#</span>
-              <span>general</span>
-            </div>
-            <div className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-accent">
-              <span className="text-muted-foreground">#</span>
-              <span>tasks</span>
-            </div>
-            <div className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-accent">
-              <span className="text-muted-foreground">#</span>
-              <span>marketing</span>
-            </div>
+            {channels?.map((channel, index) => (
+              <div
+                key={index}
+                className="flex items-center gap-2 rounded-md px-2 py-1 text-sm hover:bg-accent"
+              >
+                <span className="text-muted-foreground">#</span>
+                <span>{channel}</span>
+              </div>
+            ))}
           </div>
         </div>
 
