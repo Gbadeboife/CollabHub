@@ -55,6 +55,8 @@ export default function CreateWorkspacePage() {
     setWorkspaceData({...workspaceData, members: [...workspaceData.members, memberId]})
   }
 
+  const [newChannel, setNewChannel]= useState<string>("")
+
   const createWorkspace= async()=>{
     try{
       const data= fetch('api/workspaces/create', {
@@ -235,18 +237,6 @@ export default function CreateWorkspacePage() {
                                 <p className="text-sm text-muted-foreground">{channel.description}</p>
                               </div>
                             </div>
-                            <Checkbox 
-                              id={`channel-${channel.id}`}
-                              checked={workspaceData.channels.includes(channel.id)}
-                              onCheckedChange={(checked) => {
-                                setWorkspaceData(prev => ({
-                                  ...prev,
-                                  channels: checked 
-                                    ? [...prev.channels, channel.id]
-                                    : prev.channels.filter(id => id !== channel.id)
-                                }));
-                              }}
-                            />
                           </div>
                         ))}
                       </div>
@@ -265,10 +255,18 @@ export default function CreateWorkspacePage() {
                                 <p className="text-sm text-muted-foreground">{channel.description}</p>
                               </div>
                             </div>
-                            <Button variant="ghost" size="sm" className="h-8">
-                              <Users className="mr-2 h-4 w-4" />
-                              Assign
-                            </Button>
+                            <Checkbox 
+                              id={`channel-${channel.id}`}
+                              checked={workspaceData.channels.includes(channel.id)}
+                              onCheckedChange={(checked) => {
+                                setWorkspaceData(prev => ({
+                                  ...prev,
+                                  channels: checked 
+                                    ? [...prev.channels, channel.id]
+                                    : prev.channels.filter(id => id !== channel.id)
+                                }));
+                              }}
+                            />
                           </div>
                         ))}
                       </div>
@@ -295,7 +293,7 @@ export default function CreateWorkspacePage() {
                       name={workspaceData.name}
                       description={workspaceData.description}
                       members={suggestedMembers.filter(member => workspaceData.members.includes(member.id)).map(member => member.initials)}
-                      channels={defaultChannels.filter(channel => workspaceData.channels.includes(channel.id)).map(channel => channel.name)}
+                      channels={[...defaultChannels, ...customChannels].filter(channel => workspaceData.channels.includes(channel.id)).map(channel => channel.name)}
                     />
                   </CardContent>
                 </Card>
@@ -346,7 +344,6 @@ const defaultChannels = [
     name: "General",
     description: "Team-wide announcements and discussions",
     icon: Users,
-    default: true,
   },
   {
     id: 2,
@@ -371,7 +368,6 @@ const defaultChannels = [
         <rect width="8" height="8" x="13" y="13" rx="1" />
       </svg>
     ),
-    default: true,
   },
 ]
 
@@ -398,7 +394,7 @@ const customChannels = [
         <path d="m7 21 5-5 5 5" />
       </svg>
     ),
-  }/*,
+  },
   {
     id: 4,
     name: "Development",
@@ -420,5 +416,5 @@ const customChannels = [
         <polyline points="8 6 2 12 8 18" />
       </svg>
     ),
-  },*/
+  },
 ]
