@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
@@ -14,10 +14,14 @@ import { ChevronLeft, Plus, Users } from "lucide-react"
 import WorkspacePreview from "@/components/workspace-preview"
 import WorkspaceIconPicker from "@/components/workspace-icon-picker"
 import { redirect } from "next/navigation";
-
+import { custom, set } from "zod"
+import { suggestedMembers, defaultChannels, custChannels } from "@/lib/defaultStates"
 
 
 export default function CreateWorkspacePage() {
+
+  const [customChannels, setCustomChannels] = useState(custChannels)
+  
   
   interface WorkspaceData {
     name: string;
@@ -37,7 +41,6 @@ export default function CreateWorkspacePage() {
 
   
   const [activeTab, setActiveTab] = useState <string>("details")
-  console.log(activeTab)
 
   const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setWorkspaceData({ ...workspaceData, name: e.target.value })
@@ -71,6 +74,38 @@ export default function CreateWorkspacePage() {
     } catch (error){
       console.log(error)
     }
+  }
+
+  const addCustomChannel = () => {
+    setCustomChannels([
+      ...customChannels,
+      {                                  
+        id: customChannels.length + 3,
+        name: newChannel,
+        description: "New channel",
+        icon: () => (
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="h-5 w-5"
+          >
+            <polyline points="16 18 22 12 16 6" />
+            <polyline points="8 6 2 12 8 18" />
+          </svg>
+        ),
+      },
+    ])
+
+    setNewChannel("");
+    console.log(newChannel)
+    
   }
 
 
@@ -166,7 +201,7 @@ export default function CreateWorkspacePage() {
                           <div key={member.id} className="flex items-center justify-between rounded-lg border p-3">
                             <div className="flex items-center gap-3">
                               <Avatar>
-                                <AvatarImage src={member.avatar || "/placeholder.svg"} />
+                                <AvatarImage src={member.avatar} />
                                 <AvatarFallback>{member.initials}</AvatarFallback>
                               </Avatar>
                               <div>
@@ -209,12 +244,15 @@ export default function CreateWorkspacePage() {
                       <div className="space-y-2">
                         <Label htmlFor="channel-name">Channel Name</Label>
                         <div className="flex gap-2">
-                          <Input id="channel-name" placeholder="Enter channel name" className="flex-1" onChange={(e)=> setNewChannel(e.target.value)}/>
-                          <Button onClick={() => setCustomChannels(prev => [...prev, {
-                            id: customChannels.length + 1,}                            
+                          <Input value={newChannel} id="channel-name" placeholder="Enter channel name" className="flex-1" onChange={(e)=> setNewChannel(e.target.value)}/>
+                          <Button
+                            onClick={addCustomChannel}
+                            disabled={!newChannel.trim()}>
+                            
                             <Plus className="mr-2 h-4 w-4" />
                             Add
                           </Button>
+
                         </div>
                       </div>
 
@@ -306,116 +344,3 @@ export default function CreateWorkspacePage() {
     </div>
   )
 }
-
-// Sample data
-const suggestedMembers = [
-  {
-    id: 1,
-    name: "Alex Johnson",
-    email: "alex.johnson@example.com",
-    avatar: "/placeholder.svg",
-    initials: "AJ",
-  },
-  {
-    id: 2,
-    name: "Sarah Williams",
-    email: "sarah.w@example.com",
-    avatar: "/placeholder.svg",
-    initials: "SW",
-  },
-  {
-    id: 3,
-    name: "Michael Chen",
-    email: "michael.c@example.com",
-    avatar: "/placeholder.svg",
-    initials: "MC",
-  },
-  {
-    id: 4,
-    name: "Emma Davis",
-    email: "emma.d@example.com",
-    avatar: "/placeholder.svg",
-    initials: "ED",
-  },
-]
-
-const defaultChannels = [
-  {
-    id: 1,
-    name: "General",
-    description: "Team-wide announcements and discussions",
-    icon: Users,
-  },
-  {
-    id: 2,
-    name: "Tasks",
-    description: "Track and manage team tasks",
-    icon: () => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-5 w-5"
-      >
-        <rect width="8" height="8" x="3" y="3" rx="1" />
-        <rect width="8" height="8" x="13" y="3" rx="1" />
-        <rect width="8" height="8" x="3" y="13" rx="1" />
-        <rect width="8" height="8" x="13" y="13" rx="1" />
-      </svg>
-    ),
-  },
-]
-
-const [customChannels, setCustomChannels] = usueState([
-  {
-    id: 3,
-    name: "Marketing",
-    description: "Marketing team discussions and campaigns",
-    icon: () => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-5 w-5"
-      >
-        <path d="M2 3h20" />
-        <path d="M21 3v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V3" />
-        <path d="m7 21 5-5 5 5" />
-      </svg>
-    ),
-  },
-  {
-    id: 4,
-    name: "Development",
-    description: "Technical discussions and updates",
-    icon: () => (
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        className="h-5 w-5"
-      >
-        <polyline points="16 18 22 12 16 6" />
-        <polyline points="8 6 2 12 8 18" />
-      </svg>
-    ),
-  },
-])
