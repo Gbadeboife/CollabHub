@@ -19,11 +19,20 @@ import { redirect } from "next/navigation";
 
 export default function CreateWorkspacePage() {
   
+  interface WorkspaceData {
+    name: string;
+    description: string;
+    iconSrc: string;
+    members: number[];
+    channels: number[]; // Add this line
+  }
   
-  const [workspaceData, setWorkspaceData] = useState({
+  const [workspaceData, setWorkspaceData] = useState <WorkspaceData> ({
     name: "Marketing Team",
     description: "Collaborate on marketing campaigns and strategies",
     iconSrc: "/icons/workspace-icon-1.png",
+    members: [1],
+    channels: [1,2],
   })
 
   
@@ -40,6 +49,10 @@ export default function CreateWorkspacePage() {
 
   const handleIconSelect = (iconSrc: string) => {
     setWorkspaceData({ ...workspaceData, iconSrc })
+  }
+
+  const handleMemberSelect = (memberId: number) => {
+    setWorkspaceData({...workspaceData, members: [...workspaceData.members, memberId]})
   }
 
   const createWorkspace= async()=>{
@@ -158,7 +171,21 @@ export default function CreateWorkspacePage() {
                                 <p className="text-sm text-muted-foreground">{member.email}</p>
                               </div>
                             </div>
-                            <Checkbox id={`member-${member.id}`} />
+                            <Checkbox
+                              id={`member-${member.id}`}
+                              checked={workspaceData.members.includes(member.id)}
+                              onCheckedChange={(checked) => {
+                                const isChecked = checked === true;
+                                setWorkspaceData((prev) => ({
+                                  ...prev,
+                                  members: isChecked
+                                    ? [...prev.members, member.id]
+                                    : prev.members.filter((id) => id !== member.id),
+                                }));
+                              }}
+                            />
+
+                                
                           </div>
                         ))}
                       </div>
@@ -208,7 +235,18 @@ export default function CreateWorkspacePage() {
                                 <p className="text-sm text-muted-foreground">{channel.description}</p>
                               </div>
                             </div>
-                            <Checkbox id={`channel-${channel.id}`} defaultChecked={channel.default} />
+                            <Checkbox 
+                              id={`channel-${channel.id}`}
+                              checked={workspaceData.channels.includes(channel.id)}
+                              onCheckedChange={(checked) => {
+                                setWorkspaceData(prev => ({
+                                  ...prev,
+                                  channels: checked 
+                                    ? [...prev.channels, channel.id]
+                                    : prev.channels.filter(id => id !== channel.id)
+                                }));
+                              }}
+                            />
                           </div>
                         ))}
                       </div>
@@ -256,6 +294,8 @@ export default function CreateWorkspacePage() {
                       iconSrc={workspaceData.iconSrc}
                       name={workspaceData.name}
                       description={workspaceData.description}
+                      members={suggestedMembers.filter(member => workspaceData.members.includes(member.id)).map(member => member.initials)}
+                      channels={defaultChannels.filter(channel => workspaceData.channels.includes(channel.id)).map(channel => channel.name)}
                     />
                   </CardContent>
                 </Card>
