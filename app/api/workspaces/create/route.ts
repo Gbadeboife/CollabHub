@@ -6,7 +6,7 @@ export async function POST(request: Request) {
     interface WorkspaceData {
         id?: number;
         name: string;
-        description: string;
+        description?: string;
         iconSrc: string;
         members: number[];
         channels: number[];
