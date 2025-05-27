@@ -13,14 +13,14 @@ export async function POST(request: Request) {
     }
 
     try{
-        const supabase = await createClient();
         const workspaceData = await request.json();
-        console.log(workspaceData)
+        const supabase = await createClient();
         const { name, description, iconSrc, members, channels } = workspaceData;
         
         const owner_id= 1
         const icon= iconSrc
       
+        console.log(name)
 
         const { data , error } = await supabase
         .from('Workspaces')

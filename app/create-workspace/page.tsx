@@ -74,7 +74,7 @@ export default function CreateWorkspacePage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ workspaceData }),
+        body: JSON.stringify( workspaceData ),
       });
 
       if (!response.ok) {
