@@ -11,6 +11,7 @@ interface TaskCardProps {
 
 export function TaskCard({taskInfo}: TaskCardProps) {
   const {
+    category,
     status,
     title,
     description,
@@ -19,6 +20,10 @@ export function TaskCard({taskInfo}: TaskCardProps) {
     priority,
     comments,
   } = taskInfo
+
+
+  const statusColor = status === "Open" ? "text-green-500" : status === "In Progress" ? "text-yellow-500" : "text-red-500";
+  const priorityColor = priority === "High" ? "bg-red-100 text-red-800" : status === "Medium" ? "bg-amber-100 text-amber-800" : "bg-blue-100 text-blue-800";
 
   return (
     <Card className="overflow-hidden">
