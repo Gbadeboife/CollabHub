@@ -28,6 +28,7 @@ export async function POST(request: Request) {
 
 
         if (error || !data || data.length === 0) {
+            console.error("Supabase insert error:", error);
             console.error('Insert failed:', error);
             return;
         }
