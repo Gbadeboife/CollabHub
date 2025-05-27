@@ -15,6 +15,7 @@ export async function POST(request: Request) {
     try{
         const supabase = await createClient();
         const workspaceData = await request.json();
+        console.log(workspaceData)
         const { name, description, iconSrc, members, channels } = workspaceData;
         
         const owner_id= 1
