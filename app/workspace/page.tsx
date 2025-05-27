@@ -12,6 +12,7 @@ import TaskColumn from "@/components/tasks/task-column"
 import { TaskCard } from "@/components/tasks/task-card"
 import { TaskProps } from "../types";
 import CreateTaskModule from "@/components/modules/create-task-module";
+import { useParams } from 'next/navigation';
 
 
 export default function Workspace() {
@@ -19,50 +20,9 @@ export default function Workspace() {
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [members, setMembers]= useState <null>(null)
 
-
-
-
-  useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await fetch(`/api/tasks/${workspaceId}`);
-        const data = await response.json();
-        setTasks(data.tasks);
-      } catch (error) {
-        console.error("Failed to fetch tasks:", error);
-      }
-    };
-
-    fetchTasks();
-    setTasks(prev => [...prev, taskCardInfo])
-
-  }, []);
-
-
-  useEffect(() => {
-    const fetchMembers = async () => {
-      try {
-        const response = await fetch(`/api/members/${workspaceId}`);
-        const data = await response.json();
-        setMembers(data.members);
-      } catch (error) {
-        console.error("Failed to fetch tasks:", error);
-      }
-    };
-
-    fetchMembers();
-
-  }, []);
-
-  /*const supabase = await createClient();
-
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
-  if (!user) {
-    return redirect("/sign-in");
-  }*/
+  const params = useParams();
+  const workspaceId = params.workspaceId;
+  
 
     const taskCardInfo = {
       category: "To do",
@@ -76,6 +36,36 @@ export default function Workspace() {
       priorityColor: "bg-red-100 text-red-800",
       comments: 8,
     }
+
+
+  useEffect(() => {
+    /*const fetchTasks = async () => {
+      try {
+        const response = await fetch(`/api/tasks/${workspaceId}`);
+        const data = await response.json();
+        setTasks(data.tasks);
+      } catch (error) {
+        console.error("Failed to fetch tasks:", error);
+      }
+    };
+
+    fetchTasks(); */
+    setTasks(prev => [...prev, taskCardInfo])
+
+  }, []);
+  console.log("Tasks:", tasks);
+
+
+  /*const supabase = await createClient();
+
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  if (!user) {
+    return redirect("/sign-in");
+  }*/
+
 
   
 
