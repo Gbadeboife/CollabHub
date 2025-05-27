@@ -12,13 +12,11 @@ interface TaskCardProps {
 export function TaskCard({taskInfo}: TaskCardProps) {
   const {
     status,
-    statusColor,
     title,
     description,
     assignees,
     date,
     priority,
-    priorityColor,
     comments,
   } = taskInfo
 

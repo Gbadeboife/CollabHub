@@ -24,18 +24,16 @@ export default function Workspace() {
   const workspaceId = params.workspaceId;
   
 
-    const taskCardInfo = {
-      category: "To do",
-      status: "In Research",
-      statusColor: "text-amber-500",
-      title: "Social Media Campaign Planning",
-      description: "Develop a social media campaign for the new product launch",
-      assignees: ["U3", "U4"],
-      date: "30 Mar 2023",
-      priority: "High",
-      priorityColor: "bg-red-100 text-red-800",
-      comments: 8,
-    }
+  const taskCardInfo = {
+    category: "To do",
+    status: "In Research",
+    title: "Social Media Campaign Planning",
+    description: "Develop a social media campaign for the new product launch",
+    assignees: ["U3", "U4"],
+    date: "30 Mar 2023",
+    priority: "High",
+    comments: 8,
+  }
 
 
   useEffect(() => {
