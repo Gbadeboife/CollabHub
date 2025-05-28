@@ -26,7 +26,6 @@ export default function Workspace() {
 
   const taskCardInfo = {
     category: "To do",
-    status: "In Research",
     title: "Social Media Campaign Planning",
     description: "Develop a social media campaign for the new product launch",
     assignees: ["U3", "U4"],

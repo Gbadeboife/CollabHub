@@ -12,7 +12,6 @@ interface TaskCardProps {
 export function TaskCard({taskInfo}: TaskCardProps) {
   const {
     category,
-    status,
     title,
     description,
     assignees,
@@ -22,27 +21,24 @@ export function TaskCard({taskInfo}: TaskCardProps) {
   } = taskInfo
 
 
-  const statusColor = status === "Open" ? "text-green-500" : status === "In Progress" ? "text-yellow-500" : "text-red-500";
   const priorityColor = priority === "High" ? "bg-red-100 text-red-800" : status === "Medium" ? "bg-amber-100 text-amber-800" : "bg-blue-100 text-blue-800";
 
   return (
     <Card className="overflow-hidden">
-      <CardHeader className="p-3 pb-0">
+      <CardHeader className="p-3 pt-0 pb-0">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-1.5">
-            <div className={`h-2 w-2 rounded-full ${statusColor.replace("text", "bg")}`} />
-            <span className={`text-xs font-medium ${statusColor}`}>{status}</span>
+          <div className="space-y-1.5 pt-3">
+            <h3 className="font-medium">{title}</h3>
+            <p className="text-xs text-muted-foreground line-clamp-2">{description}</p>
           </div>
+
           <Button variant="ghost" size="icon" className="h-7 w-7">
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </div>
       </CardHeader>
       <CardContent className="p-3 pt-2">
-        <div className="space-y-1.5">
-          <h3 className="font-medium">{title}</h3>
-          <p className="text-xs text-muted-foreground line-clamp-2">{description}</p>
-        </div>
+
         <div className="mt-3">
           <div className="flex items-center justify-between text-xs text-muted-foreground">
             <div>
