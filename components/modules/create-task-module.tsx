@@ -8,21 +8,17 @@ import { X } from "lucide-react";
 
 interface CreateTaskModuleProps {
   onClose: () => void;
-  wrkSpaceMembers: string[]
+  workSpaceMembers: number[]
 }
 
-export default function CreateTaskModule({ onClose, wrkSpaceMembers }: CreateTaskModuleProps) {
+export default function CreateTaskModule({ onClose, workSpaceMembers }: CreateTaskModuleProps) {
   const [formData, setFormData] = useState<TaskProps>({
     category: "To do",
-    status: "Not Started",
-    statusColor: "text-purple-500",
     title: "",
     description: "",
     assignees: [],
     date: new Date().toLocaleDateString(),
     priority: "Medium",
-    priorityColor: "bg-amber-100 text-amber-800",
-    comments: 0,
   });
 
 

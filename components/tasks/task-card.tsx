@@ -17,7 +17,6 @@ export function TaskCard({taskInfo}: TaskCardProps) {
     assignees,
     date,
     priority,
-    comments,
   } = taskInfo
 
 
@@ -67,7 +66,6 @@ export function TaskCard({taskInfo}: TaskCardProps) {
           <div className="flex items-center gap-2">
             <div className="flex items-center gap-1">
               <MessageSquare className="h-3.5 w-3.5" />
-              <span>{comments} Comments</span>
             </div>
           </div>
         </div>

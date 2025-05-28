@@ -5,5 +5,4 @@ export interface TaskProps {
     assignees: string[]
     date: string
     priority: string
-    comments: number
   }
