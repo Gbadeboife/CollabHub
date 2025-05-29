@@ -13,7 +13,6 @@ import { TaskCard } from "@/components/tasks/task-card"
 import { TaskProps } from "../types";
 import CreateTaskModule from "@/components/modules/create-task-module";
 import { useParams } from 'next/navigation';
-import { suggestedMembers } from "@/lib/defaultStates";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
@@ -50,15 +49,16 @@ export default function Tasks() {
     setTasks(prev => [...prev, taskCardInfo])
 
 
-      const workspaceData = {
-    members: [1,2,3,4]
-  }
-  let workspaceMembers= workspaceData.members.map((member) => suggestedMembers[member])
-
-  console.log( workspaceMembers);
   }, []);
   console.log("Tasks:", tasks);
 
+  const workspaceData = {
+    members: [1,2,3,4]
+  }
+  
+
+
+  
 
   /*const supabase = await createClient();
 
@@ -185,7 +185,8 @@ export default function Tasks() {
           </div>
           {showCreateTask && (
             <CreateTaskModule
-              onClose={() => setShowCreateTask(false)              workSpaceMembers={}
+              onClose={() => setShowCreateTask(false)}
+              workSpaceMembers= {workspaceData.members}
             />
           )}
           <Tabs defaultValue="board" className="w-full">

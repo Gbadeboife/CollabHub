@@ -5,6 +5,9 @@ import { TaskProps } from "@/app/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
+import { suggestedMembers } from "@/lib/defaultStates";
+
+
 
 interface CreateTaskModuleProps {
   onClose: () => void;
@@ -114,23 +117,25 @@ export default function CreateTaskModule({ onClose, workSpaceMembers }: CreateTa
           <div>
             <label className="block text-sm font-medium mb-1">Assignees</label>
             <div className="space-y-2">
-              {["U1", "U2", "U3", "U4"].map((user) => (
-                <label key={user} className="flex items-center gap-2">
+              {
+              workSpaceMembers.map((member) => 
+
+                <label key={member} className="flex items-center gap-2">
                   <input
                     type="checkbox"
                     className="rounded border-gray-300"
-                    checked={formData.assignees.includes(user)}
+                    checked={formData.assignees.includes(member)}
                     onChange={(e) => {
                       setFormData({
                         ...formData,
                         assignees: e.target.checked
-                          ? [...formData.assignees, user]
-                          : formData.assignees.filter(u => u !== user)
+                          ? [...formData.assignees, member]
+                          : formData.assignees.filter(u => u !== member)
                       });
                     }}
                   />
                   <img src="" alt="" />
-                  <span className="text-sm">User {user}</span>
+                  <span className="text-sm">User {suggestedMembers.find((m)=> m.id === member;)}</span>
                 </label>
               ))}
             </div>
