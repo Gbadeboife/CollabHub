@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { FileText, Link2, MessageSquare, MoreHorizontal } from "lucide-react"
 import { TaskProps } from "@/app/types"
-
+import { suggestedMembers } from "@/lib/defaultStates"
 
 interface TaskCardProps {
   taskInfo: TaskProps
@@ -44,10 +44,12 @@ export function TaskCard({taskInfo}: TaskCardProps) {
               <span>Assignees:</span>
             </div>
             <div className="flex -space-x-2">
-              {assignees.map((assignee, index) => (
+              {
+              suggestedMembers.filter(member => assignees.includes(member.id))
+              .map((assignee, index) => (
                 <Avatar key={index} className="h-6 w-6 border-2 border-background">
-                  <AvatarImage src="/placeholder.svg" alt={assignee} />
-                  <AvatarFallback className="text-[10px]">{assignee}</AvatarFallback>
+                  <AvatarImage src="/placeholder.svg" alt={assignee.name} />
+                  <AvatarFallback className="text-[10px]">{assignee.initials}</AvatarFallback>
                 </Avatar>
               ))}
             </div>
@@ -61,7 +63,6 @@ export function TaskCard({taskInfo}: TaskCardProps) {
           <div className={`rounded-full px-2 py-0.5 text-xs font-medium ${priorityColor}`}>{priority}</div>
         </div>
       </CardContent>
-
     </Card>
   )
 }
