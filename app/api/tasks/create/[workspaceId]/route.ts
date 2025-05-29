@@ -1,8 +1,14 @@
 import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 
-export async function POST(request: Request) {
+export async function POST(request: Request,
+      { params }: { params: { workspaceId: string } }
+) {
     try{
+        const { workspaceId } = params
+        const workspace_id= workspaceId
+
+
         const supabase = await createClient();
         const taskData = await request.json();
         const { title, category, description, assignees, date, priority } = taskData;
@@ -10,7 +16,7 @@ export async function POST(request: Request) {
 
         const { data, error } = await supabase
         .from('Tasks')
-        .insert([{title, category, description, assignees, date, priority }]) 
+        .insert([{title, category, description, assignees, date, priority, workspace_id }]) 
 
         if (error) {
             return NextResponse.json({ error: error.message }, { status: 400 })

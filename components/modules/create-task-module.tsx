@@ -33,7 +33,7 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
     e.preventDefault();
     console.log("Form Data:", formData);
     try {
-      const response = await fetch("/api/tasks/create", {
+      const response = await fetch(`/api/tasks/create/${workspaceId}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -167,7 +167,7 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit" disabled={!formData.title || !formData.description}>
+            <Button type="submit" disabled={!formData.title || !formData.description || !formData.assignees.length}>
               Create Task
             </Button>
           </div>
