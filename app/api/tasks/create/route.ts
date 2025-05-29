@@ -5,14 +5,13 @@ export async function POST(request: Request) {
     try{
         const supabase = await createClient();
         const taskData = await request.json();
-        const { name,  } = taskData;
+        const { title, category, description, assignees, date, priority } = taskData;
         
-        const owner_id= ownerId
       
 
         const { data, error } = await supabase
         .from('Tasks')
-        .insert([{ name, owner_id }]) 
+        .insert([{ }]) 
 
         if (error) {
             return NextResponse.json({ error: error.message }, { status: 400 })
