@@ -11,10 +11,11 @@ import { suggestedMembers } from "@/lib/defaultStates";
 
 interface CreateTaskModuleProps {
   onClose: () => void;
-  workSpaceMembers: number[]
+  workSpaceMembers: number[];
+  workspaceId?: number;
 }
 
-export default function CreateTaskModule({ onClose, workSpaceMembers }: CreateTaskModuleProps) {
+export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceId }: CreateTaskModuleProps) {
   const [formData, setFormData] = useState<TaskProps>({
     category: "To do",
     title: "",
@@ -27,6 +28,7 @@ export default function CreateTaskModule({ onClose, workSpaceMembers }: CreateTa
 
   const createTask = async (e: React.FormEvent) => {
     e.preventDefault();
+    console.log("Form Data:", formData);
     try {
       const response = await fetch("/api/workspace/tasks/create", {
         method: "POST",
@@ -155,7 +157,7 @@ export default function CreateTaskModule({ onClose, workSpaceMembers }: CreateTa
             <Button type="button" variant="outline" onClick={onClose}>
               Cancel
             </Button>
-            <Button type="submit">
+            <Button type="submit" disabled={!formData.title || !formData.description}>
               Create Task
             </Button>
           </div>

@@ -4,8 +4,8 @@ import { createClient } from "@/utils/supabase/server";
 export async function POST(request: Request) {
     try{
         const supabase = await createClient();
-        const workspaceData = await request.json();
-        const { name, ownerId } = workspaceData;
+        const taskData = await request.json();
+        const { name,  } = taskData;
         
         const owner_id= ownerId
       

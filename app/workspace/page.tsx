@@ -20,8 +20,8 @@ export default function Tasks() {
   const [members, setMembers]= useState <null>(null)
 
   const params = useParams();
-  const workspaceId = params.workspaceId;
-  
+  //const workspaceId = params.workspaceId;
+  const workspaceId = 1; 
 
   const taskCardInfo = {
     category: "To do",
@@ -187,6 +187,7 @@ export default function Tasks() {
             <CreateTaskModule
               onClose={() => setShowCreateTask(false)}
               workSpaceMembers= {workspaceData.members}
+              workspaceId={workspaceId}
             />
           )}
           <Tabs defaultValue="board" className="w-full">
