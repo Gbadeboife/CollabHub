@@ -249,7 +249,7 @@ export default function Tasks() {
             </div>
             <TabsContent value="board" className="mt-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                <TaskColumn title="To do" count={4} color="text-amber-500">
+                <TaskColumn title="To do" count={tasks?.filter(task => task.category === "To do").length} color="text-amber-500">
                   {
                    tasks?.filter(task => task.category === "To do")?.map((task) => (
                     <TaskCard
@@ -285,7 +285,7 @@ export default function Tasks() {
                   />*/}
                 </TaskColumn>
 
-                <TaskColumn title="In Progress" count={4} color="text-blue-500">
+                <TaskColumn title="In Progress" count={tasks?.filter(task => task.category === "In progress").length} color="text-blue-500">
                   {tasks?.filter(task => task.category === "In progress")?.map((task) => (
                     <TaskCard
                       key={task.title}
@@ -307,7 +307,7 @@ export default function Tasks() {
                   />*/}
                 </TaskColumn>
 
-                <TaskColumn title="Done" count={4} color="text-pink-500">
+                <TaskColumn title="Done" count={tasks?.filter(task => task.category === "Done").length} color="text-pink-500">
                  
                   {tasks?.filter(task => task.category === "Done")?.map((task) => (
                     <TaskCard
