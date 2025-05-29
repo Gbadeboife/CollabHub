@@ -17,39 +17,26 @@ import { useParams } from 'next/navigation';
 export default function Tasks() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
-  const [members, setMembers]= useState <null>(null)
+  const [members, setMembers] = useState<null>(null);
 
   const params = useParams();
   //const workspaceId = params.workspaceId;
   const workspaceId = 1;
 
-  const taskCardInfo = {
-    category: "To do",
-    title: "Social Media Campaign Planning",
-    description: "Develop a social media campaign for the new product launch",
-    assignees: ["U3", "U4"],
-    date: "30 Mar 2023",
-    priority: "High",
-    comments: 8,
-  }
-
+  const fetchTasks = async () => {
+    try {
+      const response = await fetch(`/api/tasks/${workspaceId}`);
+      const data = await response.json();
+      setTasks(data.tasks);
+    } catch (error) {
+      console.error("Failed to fetch tasks:", error);
+    }
+  };
 
   useEffect(() => {
-    const fetchTasks = async () => {
-      try {
-        const response = await fetch(`/api/tasks/${workspaceId}`);
-        const data = await response.json();
-        setTasks(data.tasks);
-      } catch (error) {
-        console.error("Failed to fetch tasks:", error);
-      }
-    };
-
-    fetchTasks(); 
-    setTasks(prev => [...prev, taskCardInfo])
-
-
+    fetchTasks();
   }, []);
+
   console.log("Tasks:", tasks);
 
   const workspaceData = {
@@ -185,8 +172,9 @@ export default function Tasks() {
           {showCreateTask && (
             <CreateTaskModule
               onClose={() => setShowCreateTask(false)}
-              workSpaceMembers= {workspaceData.members}
+              workSpaceMembers={workspaceData.members}
               workspaceId={workspaceId}
+              onTaskCreated={fetchTasks}
             />
           )}
           <Tabs defaultValue="board" className="w-full">
