@@ -57,7 +57,6 @@ export default function Tasks() {
   }
   
 
-
   
 
   /*const supabase = await createClient();
@@ -251,7 +250,8 @@ export default function Tasks() {
             <TabsContent value="board" className="mt-4">
               <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                 <TaskColumn title="To do" count={4} color="text-amber-500">
-                  {tasks.filter(task => task.category === "To do").map((task) => (
+                  {
+                   tasks?.filter(task => task.category === "To do")?.map((task) => (
                     <TaskCard
                       key={task.title}
                       taskInfo= {task}
@@ -286,7 +286,7 @@ export default function Tasks() {
                 </TaskColumn>
 
                 <TaskColumn title="In Progress" count={4} color="text-blue-500">
-                  {tasks.filter(task => task.category === "In progress").map((task) => (
+                  {tasks?.filter(task => task.category === "In progress")?.map((task) => (
                     <TaskCard
                       key={task.title}
                       taskInfo= {task}
@@ -309,7 +309,7 @@ export default function Tasks() {
 
                 <TaskColumn title="Done" count={4} color="text-pink-500">
                  
-                  {tasks.filter(task => task.category === "Done").map((task) => (
+                  {tasks?.filter(task => task.category === "Done")?.map((task) => (
                     <TaskCard
                       key={task.title}
                       taskInfo= {task}
