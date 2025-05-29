@@ -21,7 +21,7 @@ export default function Tasks() {
 
   const params = useParams();
   //const workspaceId = params.workspaceId;
-  const workspaceId = 1; 
+  const workspaceId = 1;
 
   const taskCardInfo = {
     category: "To do",
@@ -35,7 +35,7 @@ export default function Tasks() {
 
 
   useEffect(() => {
-    /*const fetchTasks = async () => {
+    const fetchTasks = async () => {
       try {
         const response = await fetch(`/api/tasks/${workspaceId}`);
         const data = await response.json();
@@ -45,7 +45,7 @@ export default function Tasks() {
       }
     };
 
-    fetchTasks(); */
+    fetchTasks(); 
     setTasks(prev => [...prev, taskCardInfo])
 
 

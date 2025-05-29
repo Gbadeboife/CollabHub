@@ -4,8 +4,10 @@ import { useState } from "react";
 import { TaskProps } from "@/app/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { X } from "lucide-react";
+import { CalendarIcon, X } from "lucide-react";
 import { suggestedMembers } from "@/lib/defaultStates";
+import { Calendar } from "@/components/ui/calendar";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 
 
@@ -16,6 +18,7 @@ interface CreateTaskModuleProps {
 }
 
 export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceId }: CreateTaskModuleProps) {
+
   const [formData, setFormData] = useState<TaskProps>({
     category: "To do",
     title: "",
@@ -30,12 +33,12 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
     e.preventDefault();
     console.log("Form Data:", formData);
     try {
-      const response = await fetch("/api/workspace/tasks/create", {
+      const response = await fetch("/api/tasks/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ formData }),
+        body: JSON.stringify( formData ), 
       });
 
       const data = await response.json();
@@ -99,11 +102,6 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
               className="w-full px-3 py-2 border rounded-md bg-white"
               value={formData.priority}
               onChange={(e) => {
-                const priorityColors = {
-                  Low: "bg-blue-100 text-blue-800",
-                  Medium: "bg-amber-100 text-amber-800",
-                  High: "bg-red-100 text-red-800"
-                };
                 setFormData({ 
                   ...formData, 
                   priority: e.target.value,
@@ -143,15 +141,27 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
                 )
             })}
             </div>
-          </div>
-          <div>
+          </div>          <div>
             <label className="block text-sm font-medium mb-1">Deadline</label>
-            <Input
-              type="date"
-              value={formData.date}
-              onChange={(e) => setFormData({ ...formData, date: new Date(e.target.value).toLocaleDateString() })}
-              required
-            />
+            <Popover>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  className="w-full justify-start text-left font-normal"
+                >
+                  <CalendarIcon className="mr-2 h-4 w-4" />
+                  {formData.date}
+                </Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-auto p-0">
+                <Calendar
+                  mode="single"
+                  selected={new Date(formData.date)}
+                  onSelect={(date) => date && setFormData({ ...formData, date: date.toLocaleDateString() })}
+                  initialFocus
+                />
+              </PopoverContent>
+            </Popover>
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={onClose}>

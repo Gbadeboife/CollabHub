@@ -20,7 +20,6 @@ export async function POST(request: Request) {
         const owner_id= 1
         const icon= iconSrc
       
-        console.log(name)
 
         const { data , error } = await supabase
         .from('Workspaces')
