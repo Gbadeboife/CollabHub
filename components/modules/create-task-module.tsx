@@ -105,7 +105,6 @@ export default function CreateTaskModule({ onClose, workSpaceMembers }: CreateTa
                 setFormData({ 
                   ...formData, 
                   priority: e.target.value,
-                  priorityColor: priorityColors[e.target.value as keyof typeof priorityColors]
                 });
               }}
             >
@@ -118,27 +117,39 @@ export default function CreateTaskModule({ onClose, workSpaceMembers }: CreateTa
             <label className="block text-sm font-medium mb-1">Assignees</label>
             <div className="space-y-2">
               {
-              workSpaceMembers.map((member) => 
-
-                <label key={member} className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    className="rounded border-gray-300"
-                    checked={formData.assignees.includes(member)}
-                    onChange={(e) => {
-                      setFormData({
-                        ...formData,
-                        assignees: e.target.checked
-                          ? [...formData.assignees, member]
-                          : formData.assignees.filter(u => u !== member)
-                      });
-                    }}
-                  />
-                  <img src="" alt="" />
-                  <span className="text-sm">User {suggestedMembers.find((m)=> m.id === member;)}</span>
-                </label>
-              ))}
+              workSpaceMembers.map((member) => {
+                const currentMember = suggestedMembers.find((m) => m.id === member);
+                console.log("Current Member:", currentMember);
+                return(
+                  <label key={member} className="flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      className="rounded border-gray-300"
+                      checked={formData.assignees.includes(member)}
+                      onChange={(e) => {
+                        setFormData({
+                          ...formData,
+                          assignees: e.target.checked
+                            ? [...formData.assignees, member]
+                            : formData.assignees.filter(u => u !== member)
+                        });
+                      }}
+                    />
+                    {/*<img src="" alt="" />*/}
+                    <span className="text-sm">{currentMember?.name}</span>
+                  </label>
+                )
+            })}
             </div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium mb-1">Deadline</label>
+            <Input
+              type="date"
+              value={formData.date}
+              onChange={(e) => setFormData({ ...formData, date: new Date(e.target.value).toLocaleDateString() })}
+              required
+            />
           </div>
           <div className="flex justify-end gap-2">
             <Button type="button" variant="outline" onClick={onClose}>
