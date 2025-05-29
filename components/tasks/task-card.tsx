@@ -61,15 +61,7 @@ export function TaskCard({taskInfo}: TaskCardProps) {
           <div className={`rounded-full px-2 py-0.5 text-xs font-medium ${priorityColor}`}>{priority}</div>
         </div>
       </CardContent>
-      <CardFooter className="border-t p-3">
-        <div className="flex w-full items-center justify-between text-xs text-muted-foreground">
-          <div className="flex items-center gap-2">
-            <div className="flex items-center gap-1">
-              <MessageSquare className="h-3.5 w-3.5" />
-            </div>
-          </div>
-        </div>
-      </CardFooter>
+
     </Card>
   )
 }
