@@ -64,7 +64,8 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
             <X className="h-4 w-4" />
           </Button>
           <h2 className="text-xl font-bold">Create New Task</h2>
-        </div>        <div className="p-6 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-200 hover:scrollbar-thumb-gray-300 scrollbar-track-transparent">
+        </div>        
+        <div className="p-6 overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-200 hover:scrollbar-thumb-gray-300 scrollbar-track-transparent">
           <form onSubmit={createTask} className="space-y-4">
             <div>
               <label className="block text-sm font-medium mb-1">Title</label>
@@ -74,6 +75,19 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
                 value={formData.title}
                 onChange={(e) => setFormData({ ...formData, title: e.target.value })}
                 required
+                maxLength={50}
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Description</label>
+              <textarea
+                className="w-full px-3 py-2 border rounded-md bg-white"
+                rows={3}
+                placeholder="Task description"
+                value={formData.description}
+                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                required
+                maxLength={250}
               />
             </div>
             <div>
@@ -89,17 +103,7 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
                 <option value="Done">Done</option>
               </select>
             </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Description</label>
-              <textarea
-                className="w-full px-3 py-2 border rounded-md bg-white"
-                rows={3}
-                placeholder="Task description"
-                value={formData.description}
-                onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-                required
-              />
-            </div>
+
             <div>
               <label className="block text-sm font-medium mb-1">Priority</label>
               <select

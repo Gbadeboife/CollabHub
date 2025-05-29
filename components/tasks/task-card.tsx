@@ -11,7 +11,6 @@ interface TaskCardProps {
 
 export function TaskCard({taskInfo}: TaskCardProps) {
   const {
-    category,
     title,
     description,
     assignees,
