@@ -27,7 +27,7 @@ export function TaskCard({taskInfo}: TaskCardProps) {
         <div className="flex items-center justify-between">
           <div className="space-y-1.5 pt-3">
             <h3 className="font-medium">{title}</h3>
-            <p className="text-xs text-muted-foreground line-clamp-2">{description}</p>
+            <p className="text-sm text-muted-foreground line-clamp-2">{description}</p>
           </div>
 
           <Button variant="ghost" size="icon" className="h-7 w-7">
