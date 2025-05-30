@@ -151,7 +151,7 @@ export function TaskCard({taskInfo, onUpdate}: TaskCardProps) {
               {suggestedMembers.filter(member => assignees.includes(member.id))
                 .map((assignee, index) => (
                   <Avatar key={index} className="h-6 w-6 border-2 border-background">
-                    <AvatarImage src="/placeholder.svg" alt={assignee.name} />
+                    <AvatarImage src={assignee.avatar} alt={assignee.name} />
                     <AvatarFallback className="text-[10px]">{assignee.initials}</AvatarFallback>
                   </Avatar>
                 ))}
