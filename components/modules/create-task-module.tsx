@@ -96,22 +96,7 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
                 required
                 maxLength={250}
               />
-            </div>
-            <div>
-              <label className="block text-sm font-medium mb-1">Category</label>
-              <select
-                className="w-full px-3 py-2 border rounded-md bg-white"
-                value={formData.category}
-                onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                required
-              >
-                <option value="To do">To do</option>
-                <option value="In progress">In Progress</option>
-                <option value="Done">Done</option>
-              </select>
-            </div>
-
-            <div>
+            </div>            <div>
               <label className="block text-sm font-medium mb-1">Priority</label>
               <select
                 className="w-full px-3 py-2 border rounded-md bg-white"
