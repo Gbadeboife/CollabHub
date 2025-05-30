@@ -55,7 +55,23 @@ export default function Tasks() {
           <div className="ml-auto flex items-center gap-2">
             <div className="relative hidden md:block">
               <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
-              <Input type="search" placeholder="Search" className="w-64 rounded-md pl-8 md:w-80" />
+              <Input 
+              type="search" 
+              placeholder="Search" 
+              className="w-64 rounded-md pl-8 md:w-80"
+              onChange={(e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                if (searchTerm === '') {
+                fetchTasks(); // Reset to original tasks
+                } else {
+                const filteredTasks = tasks.filter(task => 
+                  task.title.toLowerCase().includes(searchTerm) || 
+                  task.description.toLowerCase().includes(searchTerm)
+                );
+                setTasks(filteredTasks);
+                }
+              }}
+              />
             </div>
             <Button variant="ghost" size="icon" className="h-8 w-8">
               <Clock className="h-4 w-4" />
@@ -109,10 +125,11 @@ export default function Tasks() {
               </div>
             </div>
             <div className="flex gap-2">
-              <Button className="gap-1">
+              {/*<Button className="gap-1">
                 <UserPlus className="h-4 w-4" />
                 Invite Member
-              </Button>              <Button variant="outline" className="gap-1">
+              </Button>*/}              
+              <Button variant="outline" className="gap-1">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="24"
