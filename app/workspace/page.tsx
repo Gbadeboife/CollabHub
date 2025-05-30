@@ -110,8 +110,8 @@ export default function Tasks() {
                 {suggestedMembers.filter(member => workspaceData.members.includes(member.id))
                 .slice(0, 3)
                 .map((assignee, index) => (
-                  <Avatar key={index} className="border-2 border-background">
-                    <AvatarImage src={assignee.avatar} alt={assignee.name} />
+                  <Avatar key={index} className="border-2 border-background ">
+                    <AvatarImage src={assignee.avatar} alt={assignee.name}/>
                     <AvatarFallback className="text-[10px]">{assignee.initials}</AvatarFallback>
                   </Avatar>
                 ))}
