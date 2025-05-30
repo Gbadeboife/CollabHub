@@ -160,7 +160,7 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
               </div>
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Deadline</label>
+              <label className="block text-sm font-medium mb-1">Due Date</label>
               <Popover>
                 <PopoverTrigger asChild>
                   <Button
