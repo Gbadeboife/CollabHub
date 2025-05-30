@@ -46,12 +46,12 @@ export default function Tasks() {
   return (
     <div className="min-h-screen bg-white">
       <header className="border-b">
-        <div className="container flex h-14 items-center px-4 md:px-6">
+        <div className="container flex h-10 sm:h-14 items-center px-4 md:px-6">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">
-            <Button variant="ghost" size="icon" className="h-8 w-8">
+            <Button variant="ghost" size="icon" className="w-4 sm:h-8 sm:w-8">
               <ChevronLeft className="h-4 w-4" />
             </Button>
-            <span>Team spaces</span>
+            <span className="text-sm">Team spaces</span>
             <span>/</span>
             <span className="font-medium text-foreground">Tasks</span>
           </div>
@@ -99,11 +99,11 @@ export default function Tasks() {
           </div>
         </div>
       </header>
-      <main className="container px-4 py-6 md:px-6">
+      <main className="container px-4 py-4 sm-py-6 md:px-6">
         <div className="flex flex-col gap-4">
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Tasks</h1>
-            <p className="text-muted-foreground">Keep track of your team's tasks all in one place.</p>
+            <h1 className="text-xl sm-text-2xl font-bold tracking-tight">Tasks</h1>
+            <p className="text-muted-foreground text-sm">Keep track of your team's tasks all in one place.</p>
           </div>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex -space-x-2">
@@ -111,8 +111,8 @@ export default function Tasks() {
                 .slice(0, 3)
                 .map((assignee, index) => (
                   <Avatar key={index} className="border-2 border-background">
-                  <AvatarImage src={assignee.avatar} alt={assignee.name} />
-                  <AvatarFallback className="text-[10px]">{assignee.initials}</AvatarFallback>
+                    <AvatarImage src={assignee.avatar} alt={assignee.name} />
+                    <AvatarFallback className="text-[10px]">{assignee.initials}</AvatarFallback>
                   </Avatar>
                 ))}
                 
