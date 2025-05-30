@@ -13,6 +13,9 @@ import { TaskCard } from "@/components/tasks/task-card"
 import { TaskProps } from "../types";
 import CreateTaskModule from "@/components/modules/create-task-module";
 import { useParams } from 'next/navigation';
+import { suggestedMembers } from "@/lib/defaultStates";
+
+
 
 export default function Tasks() {
   const [tasks, setTasks] = useState<TaskProps[]>([]);
@@ -104,25 +107,20 @@ export default function Tasks() {
           </div>
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex -space-x-2">
-              <Avatar className="border-2 border-background">
-                <AvatarImage src="/placeholder.svg" alt="User" />
-                <AvatarFallback>U1</AvatarFallback>
-              </Avatar>
-              <Avatar className="border-2 border-background">
-                <AvatarImage src="/placeholder.svg" alt="User" />
-                <AvatarFallback>U2</AvatarFallback>
-              </Avatar>
-              <Avatar className="border-2 border-background">
-                <AvatarImage src="/placeholder.svg" alt="User" />
-                <AvatarFallback>U3</AvatarFallback>
-              </Avatar>
-              <Avatar className="border-2 border-background">
-                <AvatarImage src="/placeholder.svg" alt="User" />
-                <AvatarFallback>U4</AvatarFallback>
-              </Avatar>
-              <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-background bg-muted text-xs font-medium">
-                +2
-              </div>
+                {suggestedMembers.filter(member => workspaceData.members.includes(member.id))
+                .slice(0, 3)
+                .map((assignee, index) => (
+                  <Avatar key={index} className="border-2 border-background">
+                  <AvatarImage src={assignee.avatar} alt={assignee.name} />
+                  <AvatarFallback className="text-[10px]">{assignee.initials}</AvatarFallback>
+                  </Avatar>
+                ))}
+                
+                {workspaceData.members.length > 3 && (
+                <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-background bg-muted text-xs font-medium">
+                  +{workspaceData.members.length - 3}
+                </div>
+                )}
             </div>
             <div className="flex gap-2">
               {/*<Button className="gap-1">
