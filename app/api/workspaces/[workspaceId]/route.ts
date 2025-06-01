@@ -5,7 +5,7 @@ export async function GET(  req: Request,
   { params }: { params: { workspaceId: string } }
 ) {
     try{
-        const { workspaceId } = params;
+        const { workspaceId } = await params;
         const workspaceIdNum = parseInt(workspaceId, 10);
 
         const supabase = await createClient();

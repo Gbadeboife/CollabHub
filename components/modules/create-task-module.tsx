@@ -120,7 +120,8 @@ export default function CreateTaskModule({ onClose, workSpaceMembers, workspaceI
                 workSpaceMembers.map((member) => {
                   const currentMember = suggestedMembers.find((m) => m.id === member);
                   console.log("Current Member:", currentMember);
-                  return(                  <div key={member} className="flex items-center space-x-2">
+                  return(         
+                  <div key={member} className="flex items-center space-x-2">
                     <Checkbox
                       id={`member-${member}`}
                       checked={formData.assignees.includes(member)}

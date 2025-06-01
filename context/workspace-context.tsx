@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
 import { WorkspaceData } from '@/app/types'
+import { useParams } from 'next/navigation';
 
 interface WorkspaceContextType {
   workspace: WorkspaceData | null
@@ -16,6 +17,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [workspace, setWorkspace] = useState<WorkspaceData | null>(null)
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+
+
 
   const fetchWorkspaceData = async (workspaceId: string) => {
     try {

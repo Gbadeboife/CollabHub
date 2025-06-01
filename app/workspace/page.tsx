@@ -20,9 +20,9 @@ export default function Tasks() {
   const { workspace, loading, error } = useWorkspace()
   
   const workspaceId = 1;
+  console.log(workspace)
 
   
-  console.log("Workspace Data:", workspace)
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [members, setMembers] = useState<null>(null);
@@ -41,7 +41,7 @@ export default function Tasks() {
 
   useEffect(() => {
     fetchTasks();
-  }, []);
+  }, [workspace]);
 
 
 
@@ -55,7 +55,7 @@ export default function Tasks() {
               <Button variant="ghost" size="icon" className="w-4 sm:h-8 sm:w-8">
                 <ChevronLeft className="h-4 w-4" />
               </Button>
-              <span className="text-sm">Team spaces</span>
+              <span className="text-sm">{ workspace?.name || 'Team spaces'}</span>
               <span>/</span>
               <span className="font-medium text-foreground">Tasks</span>
             </div>
