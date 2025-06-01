@@ -1,14 +1,17 @@
+"use client"
 import { MessageSquare, CheckSquare } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
+import { usePathname } from 'next/navigation'
+
+
 
 interface VerticalNavProps {
   workspaceLogo?: string
   workspaceName: string
-  currentPath: string
 }
 
-export function VerticalNav({ workspaceLogo, workspaceName, currentPath }: VerticalNavProps) {
+export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) {
   const navItems = [
     {
       icon: <MessageSquare className="w-5 h-5" />,
@@ -21,6 +24,9 @@ export function VerticalNav({ workspaceLogo, workspaceName, currentPath }: Verti
       href: "/workspace/tasks"
     }
   ]
+
+  const currentPath = usePathname()
+
 
   return (
     <div className="fixed left-0 top-0 h-full w-16 bg-white border-r flex flex-col items-center py-4">

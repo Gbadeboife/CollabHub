@@ -14,8 +14,6 @@ import { TaskProps } from "../types";
 import CreateTaskModule from "@/components/modules/create-task-module";
 import { useParams } from 'next/navigation';
 import { suggestedMembers } from "@/lib/defaultStates";
-import { VerticalNav } from "@/components/vertical-nav"
-import { usePathname } from 'next/navigation'
 
 
 
@@ -44,14 +42,10 @@ export default function Tasks() {
   const workspaceData = {
     members: [1,2,3,4]
   }
-  const pathname = usePathname()
 
   return (
     <div className="min-h-screen bg-white flex">
-      <VerticalNav 
-        workspaceName="CollabHub"
-        currentPath={pathname}
-      />
+
       <div className="flex-1 ml-16">
         <header className="border-b">
           <div className="container flex h-10 sm:h-14 items-center px-4 md:px-6">
