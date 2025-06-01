@@ -17,7 +17,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const fetchWorkspaceData = async (workspaceId: string) => {
+  const fetchWorkspaceData = async (workspaceId: number) => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
       const response = await fetch(`${baseUrl}/api/workspaces/${workspaceId}`)
@@ -36,7 +36,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    const workspaceId = '1' // Replace with dynamic ID
+    const workspaceId = 1 
     fetchWorkspaceData(workspaceId)
   }, [])
 

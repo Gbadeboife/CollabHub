@@ -15,13 +15,14 @@ import CreateTaskModule from "@/components/modules/create-task-module";
 import { useParams } from 'next/navigation';
 import { suggestedMembers } from "@/lib/defaultStates";
 import { useWorkspace } from '@/context/workspace-context'
-
+import { WorkspaceData } from "@/app/types";
 
 export default function Tasks() {
   const { workspace, loading, error } = useWorkspace()
-  const workspaceData= workspace
+  const [workspaceData, setWorkspaceData] = useState<WorkspaceData | null>(null);
+  
   const workspaceId = 1;
-
+  console.log("Workspace Data:", workspaceData)
 
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
