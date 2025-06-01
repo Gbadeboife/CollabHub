@@ -18,9 +18,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  const {params}= useParams();
+  const params= useParams();
   const workspaceId = params.workspaceId as string;
-
 
   const fetchWorkspaceData = async (workspaceId: string) => {
     try {
@@ -41,7 +40,6 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    const workspaceId = '1' 
     fetchWorkspaceData(workspaceId)
   }, [])
 

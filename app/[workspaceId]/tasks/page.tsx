@@ -10,7 +10,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ChevronLeft, Clock, MoreHorizontal, Search, SlidersHorizontal, UserPlus } from "lucide-react"
 import TaskColumn from "@/components/tasks/task-column"
 import { TaskCard } from "@/components/tasks/task-card"
-import { TaskProps } from "../../types";
+import { TaskProps } from "../../../types";
 import CreateTaskModule from "@/components/modules/create-task-module";
 import { suggestedMembers } from "@/lib/defaultStates";
 import { useWorkspace } from '@/context/workspace-context'

@@ -45,7 +45,7 @@ export const updateSession = async (request: NextRequest) => {
     }
 
     if (request.nextUrl.pathname === "/" && !user.error) {
-      return NextResponse.redirect(new URL("/workspace/1", request.url));
+      return NextResponse.redirect(new URL("/1", request.url));
     }
 
     return response;
