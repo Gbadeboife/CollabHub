@@ -22,8 +22,15 @@ export default function Tasks() {
   const [workspaceData, setWorkspaceData] = useState<WorkspaceData | null>(null);
   
   const workspaceId = 1;
-  console.log("Workspace Data:", workspaceData)
-
+  useEffect(() => {
+    if (workspace) {
+      setWorkspaceData(workspace);
+    } else {
+      console.log('error fetching workspace')// Redirect to home if no workspace is found
+    }
+  }, [workspace]);
+  
+  console.log("Workspace Data:", workspace)
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [members, setMembers] = useState<null>(null);

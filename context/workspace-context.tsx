@@ -24,7 +24,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
       const data = await response.json()
       
       if (response.ok) {
-        setWorkspace(data.workspace)
+        setWorkspace(data)
       } else {
         setError(data.error)
       }
