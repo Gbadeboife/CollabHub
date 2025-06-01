@@ -3,7 +3,7 @@ import { MessageSquare, CheckSquare, Plus } from "lucide-react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { usePathname } from 'next/navigation'
-
+import { useRouter } from 'next/navigation';
 
 
 interface VerticalNavProps {
@@ -12,6 +12,9 @@ interface VerticalNavProps {
 }
 
 export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) {
+  const currentPath = usePathname()
+  const router = useRouter()
+
   const navItems = [
     {
       icon: <MessageSquare className="w-5 h-5" />,
@@ -25,7 +28,6 @@ export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) 
     }
   ]
 
-  const currentPath = usePathname()
 
 
   return (
@@ -66,7 +68,7 @@ export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) 
             "hover:bg-gray-100 text-gray-500 hover:text-gray-900",
             "mt-4 border-t border-gray-100 pt-6"
           )}
-          onClick={() => {}}
+          onClick={() => {router.push('/create-workspace')}}
         >
           <div className="transition-transform duration-200 group-hover:scale-110">
             <Plus className="w-5 h-5" />

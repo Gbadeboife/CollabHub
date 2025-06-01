@@ -28,7 +28,7 @@ export default function RootLayout({
 
 
 
-  return (
+  return (  
     <>
     <html lang="en">
       <body className={quicksand.className}>
