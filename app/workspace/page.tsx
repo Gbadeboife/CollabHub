@@ -19,16 +19,9 @@ import { WorkspaceData } from "@/app/types";
 
 export default function Tasks() {
   const { workspace, loading, error } = useWorkspace()
-  const [workspaceData, setWorkspaceData] = useState<WorkspaceData | null>(null);
   
   const workspaceId = 1;
-  useEffect(() => {
-    if (workspace) {
-      setWorkspaceData(workspace);
-    } else {
-      console.log('error fetching workspace')// Redirect to home if no workspace is found
-    }
-  }, [workspace]);
+
   
   console.log("Workspace Data:", workspace)
   const [tasks, setTasks] = useState<TaskProps[]>([]);
@@ -40,7 +33,7 @@ export default function Tasks() {
 
   const fetchTasks = async () => {
     try {
-      const response = await fetch(`/api/tasks/${workspaceId}`);
+      const response = await fetch(`/api/tasks/${workspace?.id}`);
       const data = await response.json();
       setTasks(data.tasks);
     } catch (error) {
@@ -120,7 +113,7 @@ export default function Tasks() {
             </div>
             <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex -space-x-2">
-                  {suggestedMembers.filter(member => workspaceData.members.includes(member.id))
+                  {suggestedMembers.filter(member => workspace?.members.includes(member.id))
                   .slice(0, 3)
                   .map((assignee, index) => (
                     <Avatar key={index} className="border-2 border-background ">
@@ -129,9 +122,9 @@ export default function Tasks() {
                     </Avatar>
                   ))}
                   
-                  {workspaceData.members.length > 3 && (
+                  {workspace?.members.length > 3 && (
                   <div className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-background bg-muted text-xs font-medium">
-                    +{workspaceData.members.length - 3}
+                    +{workspace?.members.length - 3}
                   </div>
                   )}
               </div>
@@ -182,7 +175,7 @@ export default function Tasks() {
             {showCreateTask && (
               <CreateTaskModule
                 onClose={() => setShowCreateTask(false)}
-                workSpaceMembers={workspaceData.members}
+                workSpaceMembers={workspace?.members}
                 workspaceId={workspaceId}
                 onTaskCreated={fetchTasks}
               />
