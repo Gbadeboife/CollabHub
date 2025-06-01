@@ -4,6 +4,8 @@ import { ThemeProvider } from "next-themes";
 import Link from "next/link";
 import "./globals.css";
 import { VerticalNav } from "@/components/vertical-nav"
+import { WorkspaceProvider } from "@/context/workspace-context";
+
 
 
 const defaultUrl = process.env.VERCEL_URL
@@ -33,12 +35,14 @@ export default function RootLayout({
     <html lang="en">
       <body className={quicksand.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <VerticalNav 
-            workspaceName="CollabHub"
-          />
-          <main className="min-h-screen flex flex-col items-center">
-            {children}
-          </main>
+          <WorkspaceProvider>
+            <VerticalNav 
+              workspaceName="CollabHub"
+            />
+            <main className="min-h-screen flex flex-col items-center">
+              {children}
+            </main>
+          </WorkspaceProvider>
         </ThemeProvider>
       </body>
     </html>

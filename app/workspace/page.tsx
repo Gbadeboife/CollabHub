@@ -14,16 +14,21 @@ import { TaskProps } from "../types";
 import CreateTaskModule from "@/components/modules/create-task-module";
 import { useParams } from 'next/navigation';
 import { suggestedMembers } from "@/lib/defaultStates";
-
+import { useWorkspace } from '@/context/workspace-context'
 
 
 export default function Tasks() {
+  const { workspace, loading, error } = useWorkspace()
+  const workspaceData= workspace
+  const workspaceId = 1;
+
+
   const [tasks, setTasks] = useState<TaskProps[]>([]);
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [members, setMembers] = useState<null>(null);
 
   const params = useParams();
-  const workspaceId = 1;
+
 
   const fetchTasks = async () => {
     try {
@@ -39,9 +44,7 @@ export default function Tasks() {
     fetchTasks();
   }, []);
 
-  const workspaceData = {
-    members: [1,2,3,4]
-  }
+
 
   return (
     <div className="min-h-screen bg-white flex">

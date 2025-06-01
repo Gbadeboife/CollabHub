@@ -21,8 +21,8 @@ export async function GET(  req: Request,
         }
 
         // Fetch channels for workspace
-        const { data: channels, error: channelsError } = await supabase
-        .from('Channels')
+        const { data, error: channelsError } = await supabase
+        .from('Workspaces')
         .select('*')
         .eq('workspace_id', workspaceId);
 
@@ -30,7 +30,7 @@ export async function GET(  req: Request,
             return NextResponse.json({ error: channelsError.message }, { status: 404 });
         }
 
-        return NextResponse.json({ workspace, channels }, { status: 200 });
+        return NextResponse.json({ data }, { status: 200 });
 
     } catch (error) {
         return new NextResponse("Internal Server Error", {

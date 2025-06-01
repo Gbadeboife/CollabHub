@@ -1,16 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-
-interface WorkspaceData {
-  id: number
-  name: string
-  description?: string
-  icon: string
-  members: number[]
-  channels: number[]
-  owner_id: number
-}
+import { WorkspaceData } from '@/app/types'
 
 interface WorkspaceContextType {
   workspace: WorkspaceData | null
@@ -19,7 +10,7 @@ interface WorkspaceContextType {
   setWorkspace: (workspace: WorkspaceData) => void
 }
 
-const WorkspaceContext = createContext<WorkspaceContextType | undefined>(undefined)
+export const WorkspaceContext = createContext<WorkspaceContextType | undefined>(undefined)
 
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [workspace, setWorkspace] = useState<WorkspaceData | null>(null)
@@ -45,7 +36,6 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   }
 
   useEffect(() => {
-    // Get workspace ID from URL or other source
     const workspaceId = '1' // Replace with dynamic ID
     fetchWorkspaceData(workspaceId)
   }, [])
