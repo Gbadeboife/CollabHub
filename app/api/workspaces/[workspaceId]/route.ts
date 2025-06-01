@@ -6,6 +6,7 @@ export async function GET(  req: Request,
 ) {
     try{
         const { workspaceId } = params;
+        const workspaceIdNum = parseInt(workspaceId, 10);
 
         const supabase = await createClient();
 
@@ -13,7 +14,7 @@ export async function GET(  req: Request,
         const { data, error: workspaceError } = await supabase
         .from('Workspaces')
         .select('*')
-        .eq('id', workspaceId)
+        .eq('id', workspaceIdNum)
         .single();
 
         if (workspaceError) {
