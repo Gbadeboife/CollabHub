@@ -37,7 +37,6 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <WorkspaceProvider>
             <VerticalNav 
-              workspaceName="CollabHub"
             />
             <main className="min-h-screen flex flex-col items-center">
               {children}

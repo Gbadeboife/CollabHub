@@ -2,7 +2,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { FileText, Link2, MessageSquare, MoreHorizontal, CheckCircle2, Trash2 } from "lucide-react"
-import { TaskProps } from "@/app/types"
+import { TaskProps } from "@/types"
 import { suggestedMembers } from "@/lib/defaultStates"
 import { useState } from "react"
 import {

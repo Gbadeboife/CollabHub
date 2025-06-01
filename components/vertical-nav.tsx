@@ -11,7 +11,7 @@ interface VerticalNavProps {
   workspaceName: string
 }
 
-export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) {
+export function VerticalNav() {
   const currentPath = usePathname()
   const router = useRouter()
   const { workspace, loading, error } = useWorkspace()
@@ -37,9 +37,9 @@ export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) 
       {/* Workspace Logo */}
       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer mb-8">
         {workspace ? (
-          <img src={workspace?.icon} alt={workspaceName} className="w-6 h-6" />
+          <img src={workspace?.icon} alt={workspace?.name} className="w-full h-full rounded-xl" />
         ) : (
-          <span className="text-lg font-semibold">{workspaceName[0]}</span>
+          <span className="text-lg font-semibold">{workspace?.name[0]}</span>
         )}
       </div>
 

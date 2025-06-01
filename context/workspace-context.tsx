@@ -1,7 +1,7 @@
 "use client"
 
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react'
-import { WorkspaceData } from '@/app/types'
+import { WorkspaceData } from '@/types'
 import { useParams } from 'next/navigation';
 
 interface WorkspaceContextType {
@@ -18,6 +18,8 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
+  const {params}= useParams();
+  const workspaceId = params.workspaceId as string;
 
 
   const fetchWorkspaceData = async (workspaceId: string) => {

@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react";
-import { TaskProps } from "@/app/types";
+import { TaskProps } from "@/types";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { CalendarIcon, X, Check } from "lucide-react";
