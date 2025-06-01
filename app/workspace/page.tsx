@@ -12,7 +12,6 @@ import TaskColumn from "@/components/tasks/task-column"
 import { TaskCard } from "@/components/tasks/task-card"
 import { TaskProps } from "../types";
 import CreateTaskModule from "@/components/modules/create-task-module";
-import { useParams } from 'next/navigation';
 import { suggestedMembers } from "@/lib/defaultStates";
 import { useWorkspace } from '@/context/workspace-context'
 import { WorkspaceData } from "@/app/types";
@@ -28,7 +27,6 @@ export default function Tasks() {
   const [showCreateTask, setShowCreateTask] = useState(false);
   const [members, setMembers] = useState<null>(null);
 
-  const params = useParams();
 
 
   const fetchTasks = async () => {
@@ -48,7 +46,7 @@ export default function Tasks() {
 
 
   return (
-    <div className="min-h-screen bg-white flex">
+    <div className="min-h-screen min-w-full bg-white flex">
 
       <div className="flex-1 ml-16">
         <header className="border-b">
