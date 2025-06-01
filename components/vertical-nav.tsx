@@ -4,7 +4,7 @@ import Link from "next/link"
 import { cn } from "@/lib/utils"
 import { usePathname } from 'next/navigation'
 import { useRouter } from 'next/navigation';
-
+import { useWorkspace } from '@/context/workspace-context'
 
 interface VerticalNavProps {
   workspaceLogo?: string
@@ -14,6 +14,8 @@ interface VerticalNavProps {
 export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) {
   const currentPath = usePathname()
   const router = useRouter()
+  const { workspace, loading, error } = useWorkspace()
+
 
   const navItems = [
     {
@@ -34,8 +36,8 @@ export function VerticalNav({ workspaceLogo, workspaceName }: VerticalNavProps) 
     <div className="fixed left-0 top-0 h-full w-16 bg-white border-r flex flex-col items-center py-4">
       {/* Workspace Logo */}
       <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center text-white shadow-sm hover:shadow-md transition-all duration-200 cursor-pointer mb-8">
-        {workspaceLogo ? (
-          <img src={workspaceLogo} alt={workspaceName} className="w-6 h-6" />
+        {workspace ? (
+          <img src={workspace?.icon} alt={workspaceName} className="w-6 h-6" />
         ) : (
           <span className="text-lg font-semibold">{workspaceName[0]}</span>
         )}
