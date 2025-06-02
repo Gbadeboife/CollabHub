@@ -16,17 +16,18 @@ export function VerticalNav() {
   const router = useRouter()
   const { workspace, loading, error } = useWorkspace()
 
+  
 
   const navItems = [
     {
       icon: <MessageSquare className="w-5 h-5" />,
       label: "Chat",
-      href: "/workspace/chat"
+      href: `/${workspace?.id}/chat`
     },
     {
       icon: <CheckSquare className="w-5 h-5" />,
       label: "Tasks",
-      href: "/workspace/tasks"
+      href: `/${workspace?.id}/tasks`
     }
   ]
 
