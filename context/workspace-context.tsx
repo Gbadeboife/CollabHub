@@ -16,7 +16,7 @@ export const WorkspaceContext = createContext<WorkspaceContextType | undefined>(
 export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const [workspace, setWorkspace] = useState<WorkspaceData | null>(null)
   const [loading, setLoading] = useState(true)
-  const [error, setError] = cuseState<string | null>(null)
+  const [error, setError] = useState<string | null>(null)
 
   const params= useParams();
   const workspaceId = params.workspaceId as string;

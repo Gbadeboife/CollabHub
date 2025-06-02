@@ -61,37 +61,60 @@ export default function CreateWorkspacePage() {
   const [newChannel, setNewChannel]= useState<string>("")
   const [isCreating, setIsCreating] = useState(false)
 
-
-  const createWorkspace= async()=>{
+  const createWorkspace = async () => {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
     setIsCreating(true)
     console.log(workspaceData)
 
     try {
-      const response = await fetch(`${baseUrl}/api/workspaces/create`, {
+      // First create the workspace
+      const workspaceResponse = await fetch(`${baseUrl}/api/workspaces/create`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify( workspaceData ),
+        body: JSON.stringify(workspaceData),
       });
 
-      if (!response.ok) {
+      if (!workspaceResponse.ok) {
         throw new Error("Failed to create workspace");
       }
 
-      const result = await response.json();
-      const workspaceId = result.id;
-      console.log(workspaceId)
+      const workspaceResult = await workspaceResponse.json();
+      const workspaceId = workspaceResult.id;
+      console.log("Created workspace with ID:", workspaceId);
+
+      // Get selected channels from both default and custom channels
+      const selectedChannels = [...defaultChannels, ...customChannels]
+        .filter(channel => workspaceData.channels.includes(channel.id))
+        .map(channel => ({
+          name: channel.name,
+          isPrivate: false,
+          workspaceId: workspaceId
+        }));
+
+      // Create each channel
+      const channelPromises = selectedChannels.map(channelData =>
+        fetch(`${baseUrl}/api/channels/create`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(channelData),
+        })
+      );
+
+      await Promise.all(channelPromises);
+      console.log("Created all channels");
 
       return redirect(`/workspace/${workspaceId}`);
     } catch (error) {
       console.error("Error creating workspace:", error);
     } finally {
-      setIsCreating(false)
+      setIsCreating(false);
     }
-  }
+  };
 
   const addCustomChannel = () => {
     setCustomChannels([
