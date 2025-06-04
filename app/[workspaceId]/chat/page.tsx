@@ -10,11 +10,15 @@ import { Send, MoreHorizontal } from "lucide-react"
 import ChatSidebar from "@/components/chat-sidebar"
 import MessageBubble from "@/components/message-bubble"
 import { cn } from "@/lib/utils"
+import { useWorkspace } from '@/context/workspace-context'
 
-interface Chat {
+
+
+
+interface Channel {
   id: string
   name: string
-  avatar: string
+  icon: number
   lastMessage: string
   timestamp: string
   unreadCount: number
@@ -138,7 +142,8 @@ export default function ChatPage() {
   const [selectedChat, setSelectedChat] = useState<Chat>(chats[0])
   const [messageInput, setMessageInput] = useState("")
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
-
+  const { workspace, loading, error } = useWorkspace()
+    
   const handleSendMessage = () => {
     if (messageInput.trim()) {
       // In a real app, you would send the message to your backend
@@ -153,6 +158,18 @@ export default function ChatPage() {
       handleSendMessage()
     }
   }
+
+    const fetchAllChannels = async () => {
+        try {
+            fetch(`/api/channels/${workspace?.id}`)
+
+        } catch (error) {
+        console.error("Failed to fetch channels:", error)
+        }
+    }
+
+    
+
 
   return (
     <div className="flex h-screen bg-white">

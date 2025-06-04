@@ -19,7 +19,6 @@ import { WorkspaceData } from "@/types";
 export default function Tasks() {
   const { workspace, loading, error } = useWorkspace()
   
-  const workspaceId = 1;
   console.log(workspace)
 
   
