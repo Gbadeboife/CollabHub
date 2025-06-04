@@ -18,7 +18,7 @@ export function VerticalNav() {
 
   
 
-  const navItems = [c
+  const navItems = [
     {
       icon: <MessageSquare className="w-5 h-5" />,
       label: "Chat",

@@ -23,7 +23,7 @@ export async function POST(request: Request) {
 
         const { data , error } = await supabase
         .from('Workspaces')
-        .insert([{ name, owner_id, description, icon, members, channels }]) 
+        .insert([{ name, owner_id, description, icon, members, channels: [] }]) 
         .select() as unknown as { data: WorkspaceData[] | null; error: any };
 
 

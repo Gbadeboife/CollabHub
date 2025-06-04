@@ -327,7 +327,7 @@ export default function CreateWorkspacePage() {
                           <div key={channel.id} className="flex items-center justify-between rounded-lg border p-3">
                             <div className="flex items-center gap-3">
                               <div className="flex h-9 w-9 items-center justify-center rounded-md bg-muted">
-                                <channel.icon className="h-5 w-5" />
+                                <channel.icon />
                               </div>
                               <div>
                                 <p className="font-medium">{channel.name}</p>
