@@ -93,7 +93,8 @@ export default function CreateWorkspacePage() {
         .map(channel => ({
           name: channel.name,
           isPrivate: false,
-          workspaceId: workspaceId
+          workspaceId: workspaceId,
+          icon: channel.id > 4 ? 4 : channel.id, 
         }));
 
       // Create each channel

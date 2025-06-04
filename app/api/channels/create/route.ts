@@ -5,7 +5,7 @@ export async function POST(request: Request) {
     try {
         const supabase = await createClient();
         const channelData = await request.json();
-        const { name, isPrivate, workspaceId } = channelData;
+        const { name, isPrivate, workspaceId, icon } = channelData;
         
         const is_private = isPrivate;
         const workspace_id = workspaceId;
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
         // Create the channel
         const { data, error: channelError } = await supabase
         .from('Channels')
-        .insert([{ name, is_private, workspace_id }])
+        .insert([{ name, is_private, workspace_id, icon }])
         .select('id');
 
         if (channelError || !data) {
