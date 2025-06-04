@@ -16,12 +16,14 @@ import WorkspaceIconPicker from "@/components/workspace-icon-picker"
 import { redirect } from "next/navigation";
 import { custom, set } from "zod"
 import { suggestedMembers, defaultChannels, custChannels } from "@/lib/defaultStates"
+import { useRouter } from 'next/navigation';
+
 
 
 export default function CreateWorkspacePage() {
 
   const [customChannels, setCustomChannels] = useState(custChannels)
-  
+  const router = useRouter();
   
   interface WorkspaceData {
     name: string;
@@ -107,8 +109,9 @@ export default function CreateWorkspacePage() {
 
       await Promise.all(channelPromises);
       console.log("Created all channels");
+      
+      router.push(`/${workspaceId}`);  
 
-      return redirect(`/workspace/${workspaceId}`);
     } catch (error) {
       console.error("Error creating workspace:", error);
     } finally {
