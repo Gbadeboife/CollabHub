@@ -21,19 +21,6 @@ export async function POST(request: Request) {
         }
 
         const channelId = data[0].id;
-
-        // Update the workspace's channels array
-        const { error: updateError } = await supabase
-        .from('Workspaces')
-        .update({
-            channels: supabase.sql`array_append(channels, ${channelId})`
-        })
-        .eq('id', workspace_id);
-
-        if (updateError) {
-            return NextResponse.json({ error: updateError.message }, { status: 400 });
-        }
-
         return NextResponse.json({ id: channelId }, { status: 201 });
 
     } catch (error) {
