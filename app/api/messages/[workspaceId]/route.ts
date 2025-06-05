@@ -2,10 +2,10 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 
 export async function GET(  req: Request,
-  { params }: { params: { channelId: string } }
+  { params }: { params: { workspaceId: string } }
 ) {
     try{
-        const { channelId } = params
+        const { workspaceId } = params
 
         const supabase = await createClient();
 
@@ -13,7 +13,7 @@ export async function GET(  req: Request,
         const { data: messages, error } = await supabase
         .from('Messages')
         .select('*')
-        .eq('channel_id', channelId)
+        .eq('workspace_id', workspaceId)
         
 
         if (error) {

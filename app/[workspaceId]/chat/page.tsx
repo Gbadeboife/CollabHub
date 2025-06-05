@@ -161,28 +161,29 @@ export default function ChatPage() {
       try {
           const response= await fetch(`/api/channels/${workspace?.id}`)
           const data= await response.json()
+          console.log(data.channels)
           setChannels(data.channels)
+
       } catch (error) {
         console.error("Failed to fetch channels:", error)
       }
   }
 
   const fetchMessages = async () => {
-    for (let i=0; i < channels.length; i++) {
-      try {
-        const response = await fetch(`/api/messages/${channel.id}`)
-        const data = await response.json()
-        // Assuming the API returns an array of messages
-        channel.messages = data.messages || []
-      } catch (error) {
-        console.error(`Failed to fetch messages for channel ${channel.id}:`, error)
-      }
+    try {
+      const response = await fetch(`/api/messages/${workspace?.id}`)
+      const data = await response.json()
+
+      console.log(data.messages)
+    } catch (error) {
+      console.error(`Failed to fetch messages for channels`, error)
     }
 
   }
   useEffect(() => {
     if (workspace) {
-      fetchChannels()
+      fetchChannels() 
+      fetchMessages()
     }
   }, [workspace])
 
