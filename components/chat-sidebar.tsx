@@ -10,12 +10,12 @@ import { cn } from "@/lib/utils"
 interface Chat {
   id: string
   name: string
-  avatar: string
-  lastMessage: string
+  icon: string
+  /*lastMessage: string
   timestamp: string
   unreadCount: number
   isOnline: boolean
-  type: "direct" | "group"
+  type: "direct" | "group"*/
 }
 
 interface ChatSidebarProps {
@@ -76,7 +76,7 @@ export default function ChatSidebar({ chats, selectedChat, onSelectChat, onToggl
               <div className="flex items-center gap-3">
                 <div className="relative">
                   <Avatar className="h-12 w-12">
-                    <AvatarImage src={chat.avatar || "/placeholder.svg"} />
+                    <AvatarImage src={chat.icon} />
                     <AvatarFallback>{chat.name.substring(0, 2)}</AvatarFallback>
                   </Avatar>
                 </div>
@@ -84,15 +84,15 @@ export default function ChatSidebar({ chats, selectedChat, onSelectChat, onToggl
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center justify-between">
                     <h3 className="font-medium truncate">{chat.name}</h3>
-                    <span className="text-xs text-muted-foreground">{chat.timestamp}</span>
+                    <span className="text-xs text-muted-foreground">{/*chat.timestamp*/}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <p className="text-sm text-muted-foreground truncate">{chat.lastMessage}</p>
-                    {chat.unreadCount > 0 && (
+                    <p className="text-sm text-muted-foreground truncate">{/*chat.lastMessage*/}</p>
+                    {/*chat.unreadCount > 0 && (
                       <div className="flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs text-primary-foreground">
                         {chat.unreadCount}
                       </div>
-                    )}
+                    )*/}
                   </div>
                 </div>
               </div>

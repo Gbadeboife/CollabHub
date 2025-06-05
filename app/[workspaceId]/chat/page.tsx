@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -18,12 +18,9 @@ import { useWorkspace } from '@/context/workspace-context'
 interface Channel {
   id: string
   name: string
-  icon: number
-  lastMessage: string
+  icon: numbers
   timestamp: string
   unreadCount: number
-  isOnline: boolean
-  type: "direct" | "group"
 }
 
 interface Message {
@@ -170,7 +167,11 @@ export default function ChatPage() {
       }
   }
 
-    
+  useEffect(() => {
+    if (workspace) {
+      fetchChannels()
+    }
+  }, [workspace])
 
 
   return (
@@ -180,7 +181,7 @@ export default function ChatPage() {
         className={cn("border-r bg-white transition-all duration-300", isSidebarOpen ? "w-80" : "w-0 overflow-hidden")}
       >
         <ChatSidebar
-          chats={chats}
+          chats={channels}
           selectedChat={selectedChat}
           onSelectChat={setSelectedChat}
           onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
