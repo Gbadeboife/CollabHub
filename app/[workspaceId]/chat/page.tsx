@@ -18,16 +18,14 @@ import { useWorkspace } from '@/context/workspace-context'
 interface Channel {
   id: string
   name: string
-  icon: numbers
+  icon: number
   timestamp: string
   unreadCount: number
 }
 
 interface Message {
   id: string
-  senderId: string
-  senderName: string
-  senderAvatar: string
+  userId: string
   content: string
   timestamp: string
   isOwn: boolean
