@@ -11,6 +11,8 @@ import ChatSidebar from "@/components/chat-sidebar"
 import MessageBubble from "@/components/message-bubble"
 import { cn } from "@/lib/utils"
 import { useWorkspace } from '@/context/workspace-context'
+import { defaultChannels } from "@/lib/defaultStates"
+import {custChannels} from "@/lib/defaultStates"
 
 
 
@@ -187,6 +189,10 @@ export default function ChatPage() {
     }
   }, [workspace])
 
+  const matchedChannel = [...defaultChannels, ...custChannels].find(
+    (channel) => channel.id === Number(chat.icon)
+  ); 
+
 
   return (
     <div className="flex h-screen bg-white">
@@ -214,7 +220,8 @@ export default function ChatPage() {
                 </Button>
               )}
               <Avatar className="h-10 w-10">
-                <AvatarImage src={selectedChat.avatar || "/placeholder.svg"} />
+                
+                <AvatarImage src={selectedChat.icon} />
                 <AvatarFallback>{selectedChat.name.substring(0, 2)}</AvatarFallback>
               </Avatar>
               <div>

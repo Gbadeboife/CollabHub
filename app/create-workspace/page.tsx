@@ -353,7 +353,8 @@ export default function CreateWorkspacePage() {
                           </div>
                         ))}
                       </div>
-                    </CardContent>                    <CardFooter className="flex justify-between">
+                    </CardContent>                    
+                    <CardFooter className="flex justify-between">
                       <Button variant="outline" onClick={() => setActiveTab("members")}>Back</Button>
                       <Button onClick={createWorkspace} disabled={isCreating}>
                         {isCreating ? (
