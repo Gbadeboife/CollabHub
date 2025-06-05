@@ -143,7 +143,8 @@ export default function ChatPage() {
   const [messageInput, setMessageInput] = useState("")
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const { workspace, loading, error } = useWorkspace()
-    
+  const [channels, setChannels] = useState<Channel[]>([])
+  
   const handleSendMessage = () => {
     if (messageInput.trim()) {
       // In a real app, you would send the message to your backend
@@ -159,14 +160,15 @@ export default function ChatPage() {
     }
   }
 
-    const fetchAllChannels = async () => {
-        try {
-            fetch(`/api/channels/${workspace?.id}`)
-
-        } catch (error) {
+  const fetchChannels = async () => {
+      try {
+          const response= await fetch(`/api/channels/${workspace?.id}`)
+          const data= await response.json()
+          setChannels(data.channels)
+      } catch (error) {
         console.error("Failed to fetch channels:", error)
-        }
-    }
+      }
+  }
 
     
 
