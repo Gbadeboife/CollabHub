@@ -25,7 +25,7 @@ interface Channel {
 
 interface Message {
   id: string
-  userId: string
+  userId: number
   content: string
   timestamp: string
   isOwn: boolean
@@ -84,6 +84,8 @@ const chats: Chat[] = [
   },
 ]
 
+/*
+
 const messages: Message[] = [
   {
     id: "1",
@@ -131,7 +133,7 @@ const messages: Message[] = [
     timestamp: "10:38 AM",
     isOwn: false,
   },
-]
+]*/
 
 export default function ChatPage() {
   const [selectedChat, setSelectedChat] = useState(chats[0])
@@ -139,7 +141,7 @@ export default function ChatPage() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const { workspace, loading, error } = useWorkspace()
   const [channels, setChannels] = useState<Channel[]>([])
-  
+  const [messages, setMessages] = useState<Message[]>([])
   const handleSendMessage = () => {
     if (messageInput.trim()) {
       // In a real app, you would send the message to your backend
@@ -171,7 +173,7 @@ export default function ChatPage() {
     try {
       const response = await fetch(`/api/messages/${workspace?.id}`)
       const data = await response.json()
-
+      setMessages(data.messages)
       console.log(data.messages)
     } catch (error) {
       console.error(`Failed to fetch messages for channels`, error)
