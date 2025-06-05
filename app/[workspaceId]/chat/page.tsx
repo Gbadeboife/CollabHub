@@ -15,15 +15,14 @@ import { defaultChannels } from "@/lib/defaultStates"
 import {custChannels} from "@/lib/defaultStates"
 
 
-
-
 interface Channel {
-  id: string
+  id: number
   name: string
   icon: number
-  timestamp: string
-  unreadCount: number
+  timestamp?: string
+  unreadCount?: number
 }
+
 
 interface Message {
   id: string
@@ -33,57 +32,13 @@ interface Message {
   isOwn: boolean
 }
 
-const chats: Chat[] = [
+const chats: Channel[] = [
   {
-    id: "1",
+    id: 1,
     name: "Marketing Team",
-    avatar: "/placeholder.svg",
-    lastMessage: "Let's review the campaign metrics",
-    timestamp: "2m ago",
-    unreadCount: 3,
-    isOnline: true,
-    type: "group",
-  },
-  {
-    id: "2",
-    name: "Alex Johnson",
-    avatar: "/placeholder.svg",
-    lastMessage: "The design looks great! 👍",
-    timestamp: "5m ago",
-    unreadCount: 0,
-    isOnline: true,
-    type: "direct",
-  },
-  {
-    id: "3",
-    name: "Development Team",
-    avatar: "/placeholder.svg",
-    lastMessage: "Sarah: Bug fix deployed to staging",
-    timestamp: "1h ago",
-    unreadCount: 1,
-    isOnline: false,
-    type: "group",
-  },
-  {
-    id: "4",
-    name: "Emma Davis",
-    avatar: "/placeholder.svg",
-    lastMessage: "Can we schedule a meeting?",
-    timestamp: "2h ago",
-    unreadCount: 0,
-    isOnline: false,
-    type: "direct",
-  },
-  {
-    id: "5",
-    name: "Project Alpha",
-    avatar: "/placeholder.svg",
-    lastMessage: "Michael: Updated the timeline",
-    timestamp: "3h ago",
-    unreadCount: 0,
-    isOnline: true,
-    type: "group",
-  },
+    icon: 1, 
+  }
+
 ]
 
 /*
@@ -138,12 +93,14 @@ const messages: Message[] = [
 ]*/
 
 export default function ChatPage() {
-  const [selectedChat, setSelectedChat] = useState(chats[0])
+  const [channels, setChannels] = useState<Channel[]>([])
+  const [selectedChat, setSelectedChat] = useState<Channel>(chats[0])
   const [messageInput, setMessageInput] = useState("")
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const { workspace, loading, error } = useWorkspace()
-  const [channels, setChannels] = useState<Channel[]>([])
   const [messages, setMessages] = useState<Message[]>([])
+  
+  
   const handleSendMessage = () => {
     if (messageInput.trim()) {
       // In a real app, you would send the message to your backend
@@ -187,13 +144,15 @@ export default function ChatPage() {
       fetchChannels() 
       fetchMessages()
     }
+    channels && setSelectedChat(channels[0])
   }, [workspace])
 
-  const matchedChannel = [...defaultChannels, ...custChannels].find(
-    (channel) => channel.id === Number(chat.icon)
-  ); 
+    let matchedChannel = [...defaultChannels, ...custChannels].find(
+      (channel) => channel.id === Number(selectedChat?.icon)
+    ); 
 
 
+    console.log(selectedChat)
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar */}
@@ -220,13 +179,10 @@ export default function ChatPage() {
                 </Button>
               )}
               <Avatar className="h-10 w-10">
-                
-                <AvatarImage src={selectedChat.icon} />
-                <AvatarFallback>{selectedChat.name.substring(0, 2)}</AvatarFallback>
+                {matchedChannel && <matchedChannel.icon/>}
               </Avatar>
               <div>
-                <h2 className="font-semibold">{selectedChat.name}</h2>
-                <p className="text-sm text-muted-foreground">{selectedChat.type === "group" ? "5 members" : ""}</p>
+                <h2 className="font-semibold">{selectedChat?.name}</h2>
               </div>
             </div>
           </div>

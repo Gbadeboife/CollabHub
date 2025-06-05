@@ -75,7 +75,7 @@ export default function ChatSidebar({ chats, selectedChat, onSelectChat, onToggl
                 onClick={() => onSelectChat(chat)}
                 className={cn(
                   "w-full rounded-lg p-3 text-left transition-colors hover:bg-accent",
-                  selectedChat.id === chat.id && "bg-accent",
+                  selectedChat?.id === chat.id && "bg-accent",
                 )}
               >
                 <div className="flex items-center gap-3">
