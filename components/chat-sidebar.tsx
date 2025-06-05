@@ -61,7 +61,7 @@ export default function ChatSidebar({ chats, selectedChat, onSelectChat, onToggl
       </div>
 
       {/* Chat List */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent hover:scrollbar-thumb-gray-300">
         <div className="p-2">
           {filteredChats.map((chat) => (
             <button

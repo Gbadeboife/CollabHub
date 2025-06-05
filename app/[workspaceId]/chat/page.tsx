@@ -203,7 +203,7 @@ export default function ChatPage() {
       </div>
 
       {/* Main Chat Area */}
-      <div className="flex flex-1 flex-col">
+      <div className="flex flex-1 flex-col ">
         {/* Chat Header */}
         <div className="border-b bg-white px-4 py-3">
           <div className="flex items-center">
@@ -226,7 +226,7 @@ export default function ChatPage() {
         </div>
 
         {/* Messages Area */}
-        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent hover:scrollbar-thumb-gray-300">
           {messages.map((message) => (
             <MessageBubble key={message.id} message={message} />
           ))}
