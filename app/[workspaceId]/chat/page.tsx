@@ -136,7 +136,7 @@ const messages: Message[] = [
 ]
 
 export default function ChatPage() {
-  const [selectedChat, setSelectedChat] = useState<Chat>(chats[0])
+  const [selectedChat, setSelectedChat] = useState(chats[0])
   const [messageInput, setMessageInput] = useState("")
   const [isSidebarOpen, setIsSidebarOpen] = useState(true)
   const { workspace, loading, error } = useWorkspace()
@@ -167,6 +167,19 @@ export default function ChatPage() {
       }
   }
 
+  const fetchMessages = async () => {
+    for (let i=0; i < channels.length; i++) {
+      try {
+        const response = await fetch(`/api/messages/${channel.id}`)
+        const data = await response.json()
+        // Assuming the API returns an array of messages
+        channel.messages = data.messages || []
+      } catch (error) {
+        console.error(`Failed to fetch messages for channel ${channel.id}:`, error)
+      }
+    }
+
+  }
   useEffect(() => {
     if (workspace) {
       fetchChannels()

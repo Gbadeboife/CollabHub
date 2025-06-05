@@ -14,8 +14,7 @@ interface Chat {
   /*lastMessage: string
   timestamp: string
   unreadCount: number
-  isOnline: boolean
-  type: "direct" | "group"*/
+  */
 }
 
 interface ChatSidebarProps {
