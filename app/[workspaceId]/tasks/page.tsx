@@ -51,9 +51,6 @@ export default function Tasks() {
         <header className="border-b">
           <div className="container flex h-10 sm:h-14 items-center px-4 md:px-6">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Button variant="ghost" size="icon" className="w-4 sm:h-8 sm:w-8">
-                <ChevronLeft className="h-4 w-4" />
-              </Button>
               <span className="text-sm">{ workspace?.name || 'Team spaces'}</span>
               <span>/</span>
               <span className="font-medium text-foreground">Tasks</span>

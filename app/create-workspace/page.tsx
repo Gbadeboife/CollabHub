@@ -154,7 +154,7 @@ export default function CreateWorkspacePage() {
 
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white pl-14">
       <header className="border-b">
         <div className="container flex h-14 items-center px-4 md:px-6">
           <div className="flex items-center gap-2 text-sm text-muted-foreground">

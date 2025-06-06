@@ -35,17 +35,17 @@ export default function ChatSidebar({ chats, selectedChat, onSelectChat, onToggl
       <div className="border-b p-4">
         <div className="flex items-center justify-between mb-4">
           <h1 className="text-xl font-bold">Messages</h1>
-          {/*<div className="flex items-center gap-1">
+          <div className="flex items-center gap-1">
             <Button variant="ghost" size="icon" className="h-8 w-8">
               <Plus className="h-4 w-4" />
             </Button>
             <Button variant="ghost" size="icon" className="h-8 w-8">
               <Settings className="h-4 w-4" />
             </Button>
-            <Button variant="ghost" size="icon" className="h-8 w-8 md:hidden" onClick={onToggleSidebar}>
+            <Button variant="ghost" size="icon" className="h-8 w-8 lg:hidden" onClick={onToggleSidebar}>
               <Menu className="h-4 w-4" />
             </Button>
-          </div>*/}
+          </div>
         </div>
 
         {/* Search */}
@@ -72,7 +72,13 @@ export default function ChatSidebar({ chats, selectedChat, onSelectChat, onToggl
             return(
               <button
                 key={chat.id}
-                onClick={() => onSelectChat(chat)}
+                onClick={() => {
+                  onSelectChat(chat)
+                  // Close sidebar on mobile when selecting a chat
+                  if (window.innerWidth < 1024) {
+                    onToggleSidebar()
+                  }
+                }}
                 className={cn(
                   "w-full rounded-lg p-3 text-left transition-colors hover:bg-accent",
                   selectedChat?.id === chat.id && "bg-accent",
@@ -89,10 +95,7 @@ export default function ChatSidebar({ chats, selectedChat, onSelectChat, onToggl
                           :
                           (<fallbackIcon.icon/>)
                         }
-                        </div>
-                        
-
-                      
+                    </div>
                   </div>
 
                   <div className="flex-1 min-w-0">
