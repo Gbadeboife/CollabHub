@@ -183,7 +183,7 @@ export default function ChatPage() {
 
     
   return (
-    <div className="flex h-screen bg-white">
+    <div className="flex h-screen bg-white min-w-full px-16">
       {/* Sidebar */}
       <div
         className={cn("border-r bg-white transition-all duration-300", isSidebarOpen ? "w-80" : "w-0 overflow-hidden")}
