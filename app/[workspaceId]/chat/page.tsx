@@ -101,9 +101,15 @@ export default function ChatPage() {
   const [messages, setMessages] = useState<Message[]>([])
   
   
-  const handleSendMessage = () => {
+  const handleSendMessage =  async () => {
     if (messageInput.trim()) {
-      // In a real app, you would send the message to your backend
+      try {
+          const response= await fetch("/api/messages/send")
+          const data= await response.json()
+
+      } catch (error) {
+        console.error("Failed to fetch channels:", error)
+      }
       console.log("Sending message:", messageInput)
       setMessageInput("")
     }
