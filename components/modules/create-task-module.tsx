@@ -14,7 +14,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 
 interface CreateTaskModuleProps {
   onClose: () => void;
-  workSpaceMembers: number[];
+  workSpaceMembers?: number[];
   workspaceId?: number;
   onTaskCreated?: () => void;
 }

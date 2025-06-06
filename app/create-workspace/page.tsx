@@ -64,14 +64,13 @@ export default function CreateWorkspacePage() {
   const [isCreating, setIsCreating] = useState(false)
 
   const createWorkspace = async () => {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
     setIsCreating(true)
     console.log(workspaceData)
 
     try {
       // First create the workspace
-      const workspaceResponse = await fetch(`${baseUrl}/api/workspaces/create`, {
+      const workspaceResponse = await fetch("/api/workspaces/create", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -99,7 +98,7 @@ export default function CreateWorkspacePage() {
 
       // Create each channel
       const channelPromises = selectedChannels.map(channelData =>
-        fetch(`${baseUrl}/api/channels/create`, {
+        fetch("/api/channels/create", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
