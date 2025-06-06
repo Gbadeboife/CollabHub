@@ -129,7 +129,7 @@ export default function Tasks() {
                 {/*<Button className="gap-1">
                   <UserPlus className="h-4 w-4" />
                   Invite Member
-                </Button>*/}              
+                </Button>             
                 <Button variant="outline" className="gap-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -149,6 +149,7 @@ export default function Tasks() {
                   </svg>
                   Share
                 </Button>
+                */} 
                 <Button onClick={() => setShowCreateTask(true)} className="gap-1">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -173,14 +174,14 @@ export default function Tasks() {
               <CreateTaskModule
                 onClose={() => setShowCreateTask(false)}
                 workSpaceMembers={workspace?.members}
-                workspaceId={workspaceId}
+                workspaceId={workspace?.id}
                 onTaskCreated={fetchTasks}
               />
             )}
             <Tabs defaultValue="board" className="w-full">
               <TabsContent value="board" className="mt-4">
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
-                  <TaskColumn title="To do" count={tasks?.filter(task => task.category === "To do").length} color="text-amber-500">
+                  <TaskColumn title="To do" count={tasks?.filter(task => task.category === "To do").length} color="text-amber-500" setShowCreateTask= {setShowCreateTask}>
                     {tasks?.filter(task => task.category === "To do")?.map((task) => (
                       <TaskCard
                         key={task.title}
@@ -190,7 +191,7 @@ export default function Tasks() {
                     ))}
                   </TaskColumn>
                   
-                  <TaskColumn title="In Progress" count={tasks?.filter(task => task.category === "In progress").length} color="text-blue-500">
+                  <TaskColumn title="In Progress" count={tasks?.filter(task => task.category === "In progress").length} color="text-blue-500" setShowCreateTask= {setShowCreateTask}>
                     {tasks?.filter(task => task.category === "In progress")?.map((task) => (
                       <TaskCard
                         key={task.title}
@@ -200,7 +201,8 @@ export default function Tasks() {
                     ))}
                   </TaskColumn>
 
-                  <TaskColumn title="Done" count={tasks?.filter(task => task.category === "Done").length} color="text-pink-500">
+                        
+                  <TaskColumn title="Done" count={tasks?.filter(task => task.category === "Done").length} color="text-pink-500" setShowCreateTask= {setShowCreateTask}>
                     {tasks?.filter(task => task.category === "Done")?.map((task) => (
                       <TaskCard
                         key={task.title}
