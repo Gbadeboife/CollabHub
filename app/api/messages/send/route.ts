@@ -5,15 +5,15 @@ export async function POST(request: Request) {
     try{
         const supabase = await createClient();
         const messageData = await request.json();
-        const { channelId, content, userId } = messageData;
+        const { content, userId, isOwn, workspaceId, timestamp } = messageData;
         
         const user_id= userId
-        const channel_id= channelId
-      
+        const workspace_id= workspaceId
+        const is_own= isOwn
 
         const { data, error } = await supabase
         .from('Messages')
-        .insert([{channel_id , user_id, content }]) 
+        .insert([{ is_own, user_id, content, workspace_id, timestamp }]) 
 
         if (error) {
             return NextResponse.json({ error: error.message }, { status: 400 })

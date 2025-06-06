@@ -13,13 +13,14 @@ import { cn } from "@/lib/utils"
 import { useWorkspace } from '@/context/workspace-context'
 import { defaultChannels } from "@/lib/defaultStates"
 import {custChannels} from "@/lib/defaultStates"
+import { timeStamp } from "console"
 
 
 interface Channel {
-  id: number
-  name: string
-  icon: number
-  timestamp?: string
+  id: number,
+  name: string,
+  icon: number,
+  timestamp?: string,
   unreadCount?: number
 }
 
@@ -38,7 +39,6 @@ const chats: Channel[] = [
     name: "Marketing Team",
     icon: 1, 
   }
-
 ]
 
 /*
@@ -104,9 +104,25 @@ export default function ChatPage() {
   const handleSendMessage =  async () => {
     if (messageInput.trim()) {
       try {
-          const response= await fetch("/api/messages/send")
-          const data= await response.json()
+            await fetch("/api/messages/send", {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify({
+                userId: 0,
+                content: messageInput,
+                workspaceId: 1,
+                isOwn: true,
+                timestamp: new Date().toLocaleTimeString('en-US', { 
+                  hour: 'numeric',
+                  minute: '2-digit',
+                  hour12: true 
+                }),
+              })
+            })
 
+          fetchMessages() // Refresh messages after sending
       } catch (error) {
         console.error("Failed to fetch channels:", error)
       }
@@ -150,15 +166,22 @@ export default function ChatPage() {
       fetchChannels() 
       fetchMessages()
     }
-    channels && setSelectedChat(channels[0])
   }, [workspace])
+  
+  useEffect(() => {
+    if(channels.length > 0){
+      setSelectedChat(channels[0])
+    }
+  }, [channels])
 
-    let matchedChannel = [...defaultChannels, ...custChannels].find(
-      (channel) => channel.id === Number(selectedChat?.icon)
-    ); 
+  let matchedChannel = [...defaultChannels, ...custChannels].find(
+    (channel) => channel.id === Number(selectedChat?.icon)
+  ); 
 
 
     console.log(selectedChat)
+
+    
   return (
     <div className="flex h-screen bg-white">
       {/* Sidebar */}
@@ -184,7 +207,7 @@ export default function ChatPage() {
                   <MoreHorizontal className="h-4 w-4" />
                 </Button>
               )}
-              <Avatar className="h-10 w-10">
+              <Avatar className="h-10 w-10 flex items-center justify-center rounded-md bg-muted">
                 {matchedChannel && <matchedChannel.icon/>}
               </Avatar>
               <div>
