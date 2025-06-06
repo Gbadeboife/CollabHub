@@ -127,14 +127,13 @@ export default function ChatPage() {
   return (
     <div className="flex h-screen bg-white w-full">
       {/* Left margin for vertical nav */}
-      <div className="w-16 flex-shrink-0" />
-
-      {/* Main content */}
+      <div className="w-16 flex-shrink-0" />      {/* Main content */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
         <div
           className={cn(
-            "fixed lg:relative lg:flex left-16 z-20 h-full bg-white transition-all duration-300 border-r",
+            "fixed lg:relative lg:flex h-full bg-white transition-all duration-300 border-r",
+            "left-16 lg:left-0 z-20",
             isSidebarOpen ? "w-80" : "w-0"
           )}
         >
