@@ -4,11 +4,11 @@ import { NextRequest } from 'next/server'
 
 
 export async function GET(
-  req: NextRequest,
+  request: NextRequest,
   { params }: { params: { workspaceId: string } }
-) { 
+) {
+  const { workspaceId } = params;
     try {
-        const { workspaceId } = params;
 
         const supabase = await createClient();
         
