@@ -27,10 +27,10 @@ interface Channel {
 
 interface Message {
   id: string
-  userId: number // Changed from user_id
+  user_id: number
   content: string
   timestamp: string
-  isOwn: boolean // Changed from is_own
+  is_own: boolean
 }
 
 export default function ChatPage() {
@@ -60,11 +60,10 @@ export default function ChatPage() {
               headers: {
                 'Content-Type': 'application/json',
               },
-              body: JSON.stringify({
-                userId: 0,
+              body: JSON.stringify({                user_id: 0,
                 content: messageInput,
                 workspaceId: workspace?.id,
-                isOwn: true,
+                is_own: true,
                 timestamp: new Date().toLocaleTimeString('en-US', { 
                   hour: 'numeric',
                   minute: '2-digit',

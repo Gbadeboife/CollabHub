@@ -13,13 +13,14 @@ import {custChannels} from "@/lib/defaultStates"
 interface Chat {
   id: number
   name: string
-  icon: string
-
+  icon: number
+  timestamp?: string
+  unreadCount?: number
 }
 
 interface ChatSidebarProps {
   chats: Chat[]
-  selectedChat: Chat
+  selectedChat: Chat | null
   onSelectChat: (chat: Chat) => void
   onToggleSidebar: () => void
 }
