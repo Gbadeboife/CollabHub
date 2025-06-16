@@ -3,11 +3,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/utils/supabase/server";
 
 export async function GET(  request: NextRequest,
-  { params }: { params: Promise<{ workspaceId: string }> | { workspaceId: string } }
+  { params }: { params: Promise<{ workspaceId: string }> }
 ) {
     try{
-        const resolvedParams = await Promise.resolve(params);
-        const { workspaceId } = resolvedParams;
+        const { workspaceId } = await params;
 
         const supabase = await createClient();
 
