@@ -1,13 +1,13 @@
-import { NextResponse } from "next/server";
-import { NextRequest } from 'next/server';
+import { NextRequest, NextResponse } from "next/server";
 
 import { createClient } from "@/utils/supabase/server";
 
 export async function GET(  request: NextRequest,
-  context: { params: { workspaceId: string } }
+  { params }: { params: Promise<{ workspaceId: string }> | { workspaceId: string } }
 ) {
     try{
-        const { workspaceId } = context.params;
+        const resolvedParams = await Promise.resolve(params);
+        const { workspaceId } = resolvedParams;
 
         const supabase = await createClient();
 
