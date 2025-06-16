@@ -24,7 +24,7 @@ export function WorkspaceProvider({ children }: { children: ReactNode }) {
   const fetchWorkspaceData = async (workspaceId: string) => {
     try {
       const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
-      const response = await fetch("/api/workspaces/${workspaceId}")
+      const response = await fetch(`/api/workspaces/${workspaceId}`)
       const data = await response.json()
       
       if (response.ok) {

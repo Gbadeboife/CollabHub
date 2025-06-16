@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server'
 
 
 export async function GET(
-  request: NextRequest,
+  request: NextRequest
   //{ params }: { params: { workspaceId: string } }
 ) {
   //const { workspaceId } = params;
