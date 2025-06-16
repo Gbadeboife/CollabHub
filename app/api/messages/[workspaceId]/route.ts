@@ -4,7 +4,7 @@ import { NextRequest } from 'next/server';
 import { createClient } from "@/utils/supabase/server";
 
 export async function GET(  request: NextRequest,
-  context: { params: { workspaceId: string } }
+  context: { params: { workspaceId: number } }
 ) {
     try{
         const { workspaceId } = context.params;
